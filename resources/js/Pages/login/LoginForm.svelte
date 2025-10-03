@@ -1,0 +1,103 @@
+<script>
+    import Title from "$components/Title/Title.svelte";
+    import { getData, postData } from "$lib/api/api.js";
+
+    let email;
+    let password;
+    let error;
+    let errorMessage;
+    let isLoading;
+
+    const login = async () => {
+        if (!email && !password) {
+            errorMessage = "O campo email e senha são obrigatórios.";
+        } else if (!email) {
+            errorMessage = "O campo email é obrigatório.";
+        } else if (!password) {
+            errorMessage = "O campo senha é obrigatório.";
+        } else {
+            errorMessage = "";
+        }
+
+        if (errorMessage) {
+            return;
+        }
+
+        isLoading = true;
+
+        try {
+            const data = await postData("/V1/login", {
+                email,
+                password,
+            });
+            const userData = data;
+            if (userData.token) {
+                console.log(userData);
+                localStorage.setItem("token", userData.token);
+                localStorage.setItem("name", userData.name);
+                localStorage.setItem("email", userData.email);
+                localStorage.setItem("id", userData.id);
+                confirmPassword(userData.token);
+            } else {
+                error = userData.error;
+            }
+        } catch (error) {
+            errorMessage = "Email ou senha incorretos.";
+        } finally {
+            isLoading = false;
+        }
+    };
+
+    function confirmPassword(data) {
+        if (data) {
+            window.location.href = "/dashboard";
+        }
+    }
+</script>
+    <Title title="Login" />
+{#if error}
+    <div class="alert alert-danger" role="alert">
+        {error}
+    </div>
+{/if}
+<form on:submit|preventDefault={login}>
+    <div class="form-group first">
+        <input
+            type="text"
+            class="form-control"
+            id="email"
+            bind:value={email}
+            placeholder="E-mail"
+        />
+    </div>
+    <br />
+    <div class="form-group last mb-4">
+        <input
+            type="password"
+            class="form-control"
+            id="password"
+            bind:value={password}
+            placeholder="Senha"
+        />
+    </div>
+    {#if errorMessage}
+        <div class="alert alert-danger" role="alert">
+            {errorMessage}
+        </div>
+    {/if}
+
+    <div class="d-flex justify-content-end">
+        <button
+            type="submit"
+            class="btn btn-block btn-primary"
+            style="width: 100%; background: #2A3F54; border-color: #2A3F54;"
+            disabled={isLoading}
+        >
+            {#if isLoading}
+                Carregando...
+            {:else}
+                Entrar
+            {/if}
+        </button>
+    </div>
+</form>
