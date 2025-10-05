@@ -1,12 +1,17 @@
 <script>
     import Title from "$components/Title/Title.svelte";
     import { getData, postData } from "$lib/api/api.js";
+    import { page } from '@inertiajs/svelte';
+    import { auth } from "$lib/auth/auth.js";
 
     let email;
     let password;
     let error;
     let errorMessage;
     let isLoading;
+    export let baseUrl = $page.props.app?.baseUrl;
+    export let csrfToken = $page.props.app?.csrfToken;
+    let endpoint = "/auth";
 
     const login = async () => {
         if (!email && !password) {
@@ -24,9 +29,10 @@
         }
 
         isLoading = true;
-
+        
         try {
-            const data = await postData("/V1/login", {
+            console.log(`${email} - ${password} - ${csrfToken}`);
+            const data = await postData(`${baseUrl}`,`${endpoint}`, {
                 email,
                 password,
             });
@@ -42,11 +48,50 @@
                 error = userData.error;
             }
         } catch (error) {
+            console.log('error', error);
             errorMessage = "Email ou senha incorretos.";
         } finally {
             isLoading = false;
         }
     };
+
+     async function handleSubmit(event) {
+        event.preventDefault();
+
+        if (!email && !password) {
+            errorMessage = "O campo email e senha são obrigatórios.";
+        } else if (!email) {
+            errorMessage = "O campo email é obrigatório.";
+        } else if (!password) {
+            errorMessage = "O campo senha é obrigatório.";
+        } else {
+            errorMessage = "";
+        }
+
+        if (errorMessage) {
+            return;
+        }
+
+        isLoading = true;
+        
+        try {
+            const data = await auth.login(baseUrl, email, password);
+            isLoading = false;
+            if(data.message !== "Authorized") {
+                errorMessage = "Email ou senha incorretos.";
+            }else{
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("name", data.name);
+                localStorage.setItem("email", data.email);
+                localStorage.setItem("id", data.id);
+                confirmPassword(data.token);
+            }
+        } catch (err) {
+            isLoading = false;
+            // Erro já está definido na store
+            console.log(err);
+        }
+    }
 
     function confirmPassword(data) {
         if (data) {
@@ -60,7 +105,7 @@
         {error}
     </div>
 {/if}
-<form on:submit|preventDefault={login}>
+<form on:submit|preventDefault={handleSubmit}>
     <div class="form-group first">
         <input
             type="text"

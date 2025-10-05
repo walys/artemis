@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\web\settings\CompanyController;
 use App\Http\Controllers\web\dashboard\DashboardController;
+use App\Http\Controllers\web\accountSettings\AccountSettingsController;
 use App\Http\Controllers\web\Logincontroller;
 use App\Http\Controllers\site\SitePortfolioController;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,8 @@ use Inertia\Inertia;
 
 #Login
 Route::get('/', [SitePortfolioController::class, 'index']);
+
+
 Route::get('/login', [Logincontroller::class, 'index']);
 Route::get('/logout', [Logincontroller::class, 'logout']);
 Route::post('/auth', [Logincontroller::class, 'auth']);
@@ -20,16 +23,15 @@ Route::get('/csrf-token', function () {
     return response()->json(['csrf_token' => $token]);
 });
 
-
-    #Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index']);
-
 Route::group(['middleware' => 'auth'], function () {
-
+    #Dashboard
+    Route::resource("dashboard", DashboardController::class);
 
     #Settings
-    Route::get('/company', [CompanyController::class, 'index']);
+    Route::resource('/company', CompanyController::class);
 
+    #Account Settings
+    Route::resource('/account-settings', AccountSettingsController::class);
     #Settings
     // Route::get('/dashboard', [DashboardController::class, 'index']);
 });

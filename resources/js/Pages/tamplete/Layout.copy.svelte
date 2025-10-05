@@ -15,7 +15,7 @@
         const token = localStorage.getItem("token");
         console.log("Token", token);
         try {
-            const response = await getData("/V1/autenticated", {
+            const response = await getData("api/V1/autenticated", {
                 headers: {
                     Authorization: `Bearer ${token}`, // inclua o token de autenticação
                 },
