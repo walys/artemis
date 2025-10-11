@@ -50,9 +50,9 @@ class Logincontroller extends Controller
 
         if (!$user) {
             $error = [
-                'message' => "Not Authorized",
-                'status' => "403",
-                'error' => "Email incorreto!"
+                'authorized' => false,
+                'status' => "422",
+                'errors' => "Email incorreto!"
             ];
             return response()->json($error
             );
@@ -63,7 +63,7 @@ class Logincontroller extends Controller
             $dataUser = $this->userService->dataUser($token->accessToken['tokenable_id']);
 
             $data = [
-                'message' => "Authorized",
+                'authorized' => true,
                 'token' => $token->plainTextToken,
                 'name' => $dataUser->first()->name,
                 'email' => $dataUser->first()->email,
@@ -77,11 +77,32 @@ class Logincontroller extends Controller
             );
         }else{
             $error = [
-                'message' => "Not Authorized",
-                'status' => "403",
-                'error' => "Senha incorreta!"
+                'authorized' => false,
+                'status' => "422",
+                'errors' => "Senha incorreta!"
             ];
             return response()->json($error);
+        }
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'cnpj' => 'required',
+            'country' => 'required',
+        ]);
+
+        try {
+            $userAcessCreated = $this->authService->registerCompanyUser($request);
+            return response()->json([$userAcessCreated], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => [
+                    'message' => 'Erro ao criar usuário',
+                    'details' => $th->getMessage() . ' - ' . $th->getLine() . ' - ' . $th->getFile(),
+                ],
+            ], 422);
         }
     }
 }

@@ -1,119 +1,44 @@
 <script>
     import Title from "$components/Title/Title.svelte";
-    import { getData, postData } from "$lib/api/api.js";
-    import { page } from '@inertiajs/svelte';
-    import { auth } from "$lib/auth/auth.js";
+    import Form from "$components/Form/Form.svelte";
 
-    let email;
-    let password;
-    let error;
-    let errorMessage;
-    let isLoading;
-    export let baseUrl = $page.props.app?.baseUrl;
-    export let csrfToken = $page.props.app?.csrfToken;
+    let isLoading = false;
+    let errors = [];
     let endpoint = "/auth";
-
-    const login = async () => {
-        if (!email && !password) {
-            errorMessage = "O campo email e senha são obrigatórios.";
-        } else if (!email) {
-            errorMessage = "O campo email é obrigatório.";
-        } else if (!password) {
-            errorMessage = "O campo senha é obrigatório.";
-        } else {
-            errorMessage = "";
-        }
-
-        if (errorMessage) {
-            return;
-        }
-
-        isLoading = true;
-        
-        try {
-            console.log(`${email} - ${password} - ${csrfToken}`);
-            const data = await postData(`${baseUrl}`,`${endpoint}`, {
-                email,
-                password,
-            });
-            const userData = data;
-            if (userData.token) {
-                console.log(userData);
-                localStorage.setItem("token", userData.token);
-                localStorage.setItem("name", userData.name);
-                localStorage.setItem("email", userData.email);
-                localStorage.setItem("id", userData.id);
-                confirmPassword(userData.token);
-            } else {
-                error = userData.error;
-            }
-        } catch (error) {
-            console.log('error', error);
-            errorMessage = "Email ou senha incorretos.";
-        } finally {
-            isLoading = false;
-        }
+    let urlRedirect = "/dashboard";
+    let fomDataLogin = {
+        email: "",
+        password: "",
     };
 
-     async function handleSubmit(event) {
-        event.preventDefault();
-
-        if (!email && !password) {
-            errorMessage = "O campo email e senha são obrigatórios.";
-        } else if (!email) {
-            errorMessage = "O campo email é obrigatório.";
-        } else if (!password) {
-            errorMessage = "O campo senha é obrigatório.";
-        } else {
-            errorMessage = "";
-        }
-
-        if (errorMessage) {
-            return;
-        }
-
-        isLoading = true;
-        
-        try {
-            const data = await auth.login(baseUrl, email, password);
-            isLoading = false;
-            if(data.message !== "Authorized") {
-                errorMessage = "Email ou senha incorretos.";
-            }else{
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("name", data.name);
-                localStorage.setItem("email", data.email);
-                localStorage.setItem("id", data.id);
-                confirmPassword(data.token);
-            }
-        } catch (err) {
-            isLoading = false;
-            // Erro já está definido na store
-            console.log(err);
-        }
+    function erros(event) {
+        errors = [];
+        errors = event.detail.errors;
     }
 
-    function confirmPassword(data) {
-        if (data) {
-            window.location.href = "/dashboard";
-        }
+    function loading(event) {
+        isLoading = event.detail.isLoading;
     }
+
 </script>
-    <Title title="Login" />
-{#if error}
-    <div class="alert alert-danger" role="alert">
-        {error}
-    </div>
-{/if}
-<form on:submit|preventDefault={handleSubmit}>
+<Title title="Login" />
+<Form 
+    typeForm="login" 
+    url={endpoint} 
+    urlRedirect={urlRedirect}
+    on:errors={erros}
+    fomData={fomDataLogin}
+    on:isLoading={loading}
+>
     <div class="form-group first">
         <input
             type="text"
             class="form-control"
             id="email"
-            bind:value={email}
+            bind:value={fomDataLogin.email}
             placeholder="E-mail"
         />
+        <span class=text-danger>{errors?.email || ""}</span>
     </div>
     <br />
     <div class="form-group last mb-4">
@@ -121,15 +46,11 @@
             type="password"
             class="form-control"
             id="password"
-            bind:value={password}
+            bind:value={fomDataLogin.password}
             placeholder="Senha"
         />
+        <span class=text-danger>{errors?.password || ""}</span>
     </div>
-    {#if errorMessage}
-        <div class="alert alert-danger" role="alert">
-            {errorMessage}
-        </div>
-    {/if}
 
     <div class="d-flex justify-content-end">
         <button
@@ -145,4 +66,4 @@
             {/if}
         </button>
     </div>
-</form>
+</Form>

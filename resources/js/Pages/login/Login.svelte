@@ -45,8 +45,7 @@
                         <h3>Artemis</h3>
                         
                         <p class="mb-4">
-                            Seja bem vindo, espero proporcinar uma boa
-                            experiência!
+                            Seja bem vindo, espero proporcinar uma boa experiência!
                         </p>
                     </div>
                     {#if isLogin}
@@ -56,18 +55,18 @@
                     {/if}
                     <br />
                     <div class="d-flex justify-content-end">
-                        <button
-                            type="submit"
+                        <a
+                            href="#!"
                             class="btn btn-block btn-secondary"
                             style="width: 100%;"
                             on:click={toggleForm}
-                        >
-                        {#if isLogin}
-                            Cadastre-se
-                        {:else}
-                            Voltar para login
-                        {/if}
-                        </button>
+                            >
+                            {#if isLogin}
+                                Cadastre-se
+                            {:else}
+                                Voltar para login
+                            {/if}
+                        </a>
                     </div>
                     <br />
                     <!-- svelte-ignore a11y-invalid-attribute -->

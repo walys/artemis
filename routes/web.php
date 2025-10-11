@@ -16,6 +16,7 @@ Route::get('/', [SitePortfolioController::class, 'index']);
 Route::get('/login', [Logincontroller::class, 'index']);
 Route::get('/logout', [Logincontroller::class, 'logout']);
 Route::post('/auth', [Logincontroller::class, 'auth']);
+Route::post('/register', [Logincontroller::class, 'register']);
 
 #Csrf-token
 Route::get('/csrf-token', function () {

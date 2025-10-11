@@ -1,30 +1,18 @@
-// resources/js/stores/auth.js
-
 import { writable } from 'svelte/store';
-// import { browser } from '$app/environment';
+let errors = [];
 
-// Recupera o usuário do localStorage se existir
-// const storedUser = browser ? JSON.parse(localStorage.getItem('user') || 'null') : null;
-
-// export const user = writable(storedUser);
 export const isLoading = writable(false);
-export const error = writable(null);
-
-// Atualiza localStorage quando o usuário muda
-// if (browser) {
-//     user.subscribe(value => {
-//         localStorage.setItem('user', JSON.stringify(value));
-//     });
-// }
+export let error = writable(null);
 
 export const auth = {
-    async login(baseUrl, email, password) {
+
+    async login(endpoint, email, password) {
         try {
             // Busca CSRF token primeiro
             const csrfResponse = await fetch('/csrf-token');
             const csrfData = await csrfResponse.json();
 
-            const response = await fetch(baseUrl + '/auth', {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,17 +22,15 @@ export const auth = {
                 body: JSON.stringify({ email, password }),
             });
             const data = await response.json();
-
-            if(Array.isArray(data)) {
-               if(data[0].message  !== "Authorized") {
-                    return 'error';
-                }     
+            console.log('data', data);
+            if(data?.errors) {
+                return data;
+            }else{
+               console.log('data passou', data);
+                return data[0]; 
             }
-
-            console.log(data);
-
-            return data[0];
         } catch (err) {
+            console.log('err', err);
             return err;
             throw err;
         } finally {
@@ -52,15 +38,13 @@ export const auth = {
         }
     },
 
-    async register(userData) {
-        isLoading.set(true);
-        error.set(null);
+    async register(endpoint, userData) {
 
         try {
             const csrfResponse = await fetch('/csrf-token');
             const csrfData = await csrfResponse.json();
 
-            const response = await fetch('/api/register', {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,16 +55,13 @@ export const auth = {
             });
 
             const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Erro no registro');
+            if(data?.errors) {
+                return data;
             }
 
-            user.set(data.user);
             return data;
         } catch (err) {
-            error.set(err.message);
-            throw err;
+            return err;
         } finally {
             isLoading.set(false);
         }
@@ -103,7 +84,6 @@ export const auth = {
             });
 
             user.set(null);
-            localStorage.removeItem('user');
             
             return await response.json();
         } catch (err) {

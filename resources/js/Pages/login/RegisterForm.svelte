@@ -3,20 +3,29 @@
     import Title from "$components/Title/Title.svelte";
     import MaskedInput from '$components/Inputs/MaskedInput.svelte';
     import Select from 'svelte-select';
+    import { page } from '@inertiajs/svelte';
     import { onMount } from "svelte";
+    import { auth } from "$lib/auth/auth.js";
     
-
+    export let baseUrl = $page.props.app?.baseUrl;
+    export let csrfToken = $page.props.app?.csrfToken;
     let errorInput;
     let error;
-    let errorMessage;
+    let errorMessage = {
+        email: '',
+        cnpj: '',
+        country: '',
+        message: '',
+    };
     let isLoading;
-    let email;
+    let email = '';
     let countryList = [];
     let country = '';
     let cnpj = '';
+    let endpoint = "/register";
 
     onMount(() => {
-        getData("/V1/countries").then((response) => {
+        getData("api/V1/countries").then((response) => {
             countryList = response;
         });
     });
@@ -25,38 +34,43 @@
         isLoading = true;
         errorInput = {};
         try {
-            const data = await postData("/V1/register", {
+            const data = {
                 email,
                 cnpj,
-                country
-            });
-            const regiterData = data;
-            console.log(regiterData[0].Authorized);
-            if (regiterData[0].Authorized === true) {
-                console.log('entrei', regiterData[0].token);
-                localStorage.setItem("token", regiterData[0].token);
-                localStorage.setItem("name", regiterData[0].name);
-                localStorage.setItem("email", regiterData[0].email);
-                localStorage.setItem("id", regiterData[0].id);
-                confirmPassword(regiterData[0].token);
+                country,
+            };
+            const registerData = await auth.register(endpoint, data);
+            
+            if(registerData?.errors){
+                if (registerData?.errors?.email) {
+                    errorMessage.email = registerData?.errors?.email[0] || '';
+                }
+                if (registerData?.errors?.cnpj) {
+                    errorMessage.cpf = registerData?.errors?.cnpj[0] || '';
+                }
+                if(registerData?.errors?.country){
+                    errorMessage.country = registerData?.errors?.country[0] || '';
+                }
+                errorMessage.message = registerData.message || registerData?.error?.message;
             }
 
-            if(regiterData?.error?.details){
-                error = true;
-                errorMessage = regiterData?.error?.details;
-                errorInput = {};
+            if(registerData?.error){
+                console.log('register', registerData.error);
+                errorMessage.message = registerData?.error?.message;
             }
-            else {
-                console.log('Ois', regiterData)
-                 errorInput = {...regiterData.errors}
-                 errorMessage = '';
+
+            if (registerData[0]?.Authorized === true) {
+                console.log('entrei', registerData[0].token);
+                // localStorage.setItem("token", registerData[0].token);
+                // localStorage.setItem("name", registerData[0].name);
+                // localStorage.setItem("email", registerData[0].email);
+                // localStorage.setItem("id", registerData[0].id);
+                confirmPassword(registerData[0].token);
             }
-        } catch (error) {
-            errorMessage = "Dados inseridos incorretamente. Por favor, verifique e tente novamente.";
-        } finally {
+        }finally {
             isLoading = false;
         }
-    };
+    }
 
     function confirmPassword(data) {
         if (data) {
@@ -69,7 +83,7 @@
 <form on:submit|preventDefault={registerCompany}>
 
     <div class="form-group first">
-        <span class="text-danger">{errorInput?.email || ""}</span>
+        <span class="text-danger">{errorMessage.email || ""}</span>
         <input
             type="email"
             class="form-control last mb-4"
@@ -77,11 +91,10 @@
             bind:value={email}
             placeholder="Informe um email válido" 
         />
-        <!-- <div class="text-danger">{error?.email[0] || ""}</div> -->
     </div>
 
     <div class="form-group first">
-        <div class="text-danger">{errorInput?.cnpj || ""}</div>
+        <div class="text-danger">{errorMessage.cpf  || ""}</div>
         <MaskedInput
             mask="99.999.999/9999-99"
             placeholderText="CNPJ"
@@ -91,15 +104,7 @@
     </div>
 
     <div class="form-group first">
-        <div class="text-danger">{errorInput?.country || ""}</div>
-        <!-- <Select
-            class="form-control last mb-4"
-            items={countryList} 
-            bind:value={country}
-            placeholder="Selecione um local"
-            multiple
-            showChevron 
-            /> -->
+        <div class="text-danger">{errorMessage.country || ""}</div>
         <Select
             class="form-control last mb-4"
             items={countryList} 
@@ -110,9 +115,9 @@
     </div>
 
     <!-- <br /> -->
-    {#if errorMessage}
+    {#if errorMessage.message}
         <div class="alert alert-danger" role="alert">
-            {errorMessage}
+            {errorMessage.message}
         </div>
     {/if}
     <div class="d-flex justify-content-end">

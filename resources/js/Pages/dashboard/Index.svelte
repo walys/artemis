@@ -5,7 +5,7 @@
 
 <Layout>
     <Title title="Dashboard" />
-    <!-- Content -->
+        <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="row">
             <div class="col-xxl-12 mb-6 order-0">
@@ -33,5 +33,5 @@
                 </div>
             </div>
         </div>
-    <!-- / Content -->
+        <!-- / Content -->
 </Layout>
