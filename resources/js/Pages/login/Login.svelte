@@ -24,7 +24,7 @@
         <div class="col-md-7">
             <!-- svelte-ignore a11y-img-redundant-alt -->
             <img
-                src="https://img.freepik.com/vetores-gratis/ilustracao-do-conceito-de-laboratorio-de-quimica_114360-13523.jpg?semt=ais_hybrid"
+                src="https://img.freepik.com/vetores-gratis/palavra-de-ciencia-com-estilo-de-microscopio_23-2148540553.jpg"
                 alt="Image"
                 class="img-fluid"
             />
@@ -36,17 +36,17 @@
                     <div class="mb-4">
                         <div class="mb-4 d-flex justify-content-center">
                             <img
-                                src="https://img.freepik.com/vetores-gratis/ilustracao-do-conceito-de-laboratorio-de-quimica_114360-13523.jpg?semt=ais_hybrid"
-                                style="border-radius: 50%; width: 35%;"
+                                src={"/sneat/logo/logo_name_sf.png"}
+                                style="border-radius: 40%; width: 75%;"
                                 alt="Logo"
                                 class="img-fluid mb-2"
                             />
                         </div>
-                        <h3>Artemis</h3>
+                        <!-- <h3>Artemis</h3>
                         
                         <p class="mb-4">
                             Seja bem vindo, espero proporcinar uma boa experiência!
-                        </p>
+                        </p> -->
                     </div>
                     {#if isLogin}
                         <LoginForm />
@@ -90,5 +90,9 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+    .btn-secondary {
+        background-color: #87C4BC !important;
+        border-color: #87C4BC !important;
     }
 </style>

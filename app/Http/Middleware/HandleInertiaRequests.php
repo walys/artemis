@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
                 'env' => app()->environment(),
                 'csrfToken' => csrf_token(),
                 'baseUrl' => env('APP_ENV') === 'local' ? url('http://app.artemis.localhost') : env('APP_URL', 'https://exemplo.com'),
-                'apiUrl' => env('APP_ENV') === 'local' ? url('http://app.artemis.localhost/api/v1') : env('API_URL', 'https://api.exemplo.com'), // se tiver uma API externa
+                'apiUrl' => env('APP_ENV') === 'local' ? url('http://app.artemis.localhost/api/V1') : env('API_URL', 'https://api.exemplo.com'), // se tiver uma API externa
             ],
             'flash' => [
                 'message' => fn () => $request->session()->get('message'),

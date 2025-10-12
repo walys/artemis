@@ -22,7 +22,7 @@ export const auth = {
                 body: JSON.stringify({ email, password }),
             });
             const data = await response.json();
-            console.log('data', data);
+
             if(data?.errors) {
                 return data;
             }else{
@@ -57,9 +57,9 @@ export const auth = {
             const data = await response.json();
             if(data?.errors) {
                 return data;
+            }else{
+                return data[0]; 
             }
-
-            return data;
         } catch (err) {
             return err;
         } finally {

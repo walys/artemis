@@ -106,23 +106,23 @@
                         <ul class="nav nav-pills flex-column flex-md-row mb-6 gap-md-0 gap-2">
                             <li class="nav-item">
                                 <button class="nav-link {accountActive}" href="#!" on:click={() => toggleForm('account')}>
-                                    <i class="icon-base bx bx-user icon-sm me-1_5"></i> Account</button>
+                                    <i class="icon-base bx bx-user icon-sm me-1_5"></i> Conta</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link {securityActive}" href="#!" on:click={() => toggleForm('security')}>
-                                    <i class="icon-base bx bx-lock-alt icon-sm me-1_5"></i> Security</button>
+                                    <i class="icon-base bx bx-lock-alt icon-sm me-1_5"></i> Seguranca</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link {billingPlansActive}" href="#!" on:click={() => toggleForm('billingPlans')}>
-                                    <i class="icon-base bx bx-detail icon-sm me-1_5"></i> Billing & Plans</button>
+                                    <i class="icon-base bx bx-detail icon-sm me-1_5"></i>  Faturamento & Planos</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link {notificationsActive}" href="#!" on:click={() => toggleForm('notifications')}>
-                                    <i class="icon-base bx bx-bell icon-sm me-1_5"></i> Notifications</button>
+                                    <i class="icon-base bx bx-bell icon-sm me-1_5"></i> Notificações</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link {connectionsActive}" href="#!" on:click={() => toggleForm('connections')}>
-                                    <i class="icon-base bx bx-link-alt icon-sm me-1_5"></i> Connections</button>
+                                    <i class="icon-base bx bx-link-alt icon-sm me-1_5"></i> Conexões</button>
                             </li>
                         </ul>
                     </div> 

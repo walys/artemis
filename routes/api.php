@@ -13,7 +13,7 @@ Route::prefix('V1')->group(function(){
     #Utils
     Route::get('/countries', [UtilController::class, 'getCountries'])->name('countries');
 
-    #Auth
+    #Auth - Protected
     Route::group(['middleware' => 'auth'], function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/auth', [AuthController::class, 'auth'])->name('auth');

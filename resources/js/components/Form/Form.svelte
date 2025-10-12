@@ -73,6 +73,11 @@
             console.log('data', data);
             if(data?.Authorized === true){
               handleSetItemStorage(data)
+            } else if(data?.authorized === false){
+              console.log('if', data);
+              if(data?.status === "422"){
+                  sweetalert('Atenção', data?.errors, 'error');
+              }
             }else{
               handleErrors(data)
             }

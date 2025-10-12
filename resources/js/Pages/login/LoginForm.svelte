@@ -55,8 +55,7 @@
     <div class="d-flex justify-content-end">
         <button
             type="submit"
-            class="btn btn-block btn-primary"
-            style="width: 100%; background: #2A3F54; border-color: #2A3F54;"
+            class="btn btn-block btn-success"
             disabled={isLoading}
         >
             {#if isLoading}
@@ -67,3 +66,10 @@
         </button>
     </div>
 </Form>
+<style>
+    .btn-success{
+        background: #B5E4E6;
+        border-color: #B5E4E6;
+        width: 100%;
+    }
+</style>

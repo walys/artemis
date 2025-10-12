@@ -8,20 +8,19 @@
         <img src="/sneat/assets/img/avatars/1.png" alt="user-avatar" class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
         <div class="button-wrapper">
             <label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-                <span class="d-none d-sm-block">Upload new photo</span>
+                <span class="d-none d-sm-block">Carregar nova foto</span>
                 <i class="icon-base bx bx-upload d-block d-sm-none"></i>
                 <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
             </label>
             <button type="button" class="btn btn-label-secondary account-image-reset mb-4">
                 <i class="icon-base bx bx-reset d-block d-sm-none"></i>
-                <span class="d-none d-sm-block">Reset</span>
+                <span class="d-none d-sm-block">Redefinir</span>
             </button>
-            <div>Allowed JPG, GIF or PNG. Max size of 800K</div>
+            <div>Permitido JPG, GIF ou PNG. Tamanho máximo de 800K</div>
         </div>
         </div>
     </div>
     <div class="card-body pt-4">
-        <form id="formAccountSettings" method="GET" onsubmit="return false">
         <div class="row g-6">
             <div class="col-md-6 form-control-validation">
             <label for="firstName" class="form-label">First Name</label>
@@ -134,9 +133,8 @@
             </div>
         </div>
         <div class="mt-6">
-            <button type="submit" class="btn btn-primary me-3">Save changes</button>
-            <button type="reset" class="btn btn-label-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary me-3">Salvar alterações</button>
+            <button type="reset" class="btn btn-label-secondary">Cancelar</button>
         </div>
-        </form>
     </div>
  </div>

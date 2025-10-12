@@ -2,6 +2,6 @@
     export let title;
 </script>
 
-<link rel="icon" type="image/svg+xml" href="https://img.freepik.com/vetores-gratis/ilustracao-do-conceito-de-laboratorio-de-quimica_114360-13523.jpg?semt=ais_hybrid">
+<link rel="icon" type="image/svg+xml" href={"/sneat/logo/logo_name_sf.png"}>
 
 <title>Artemis {title}</title>

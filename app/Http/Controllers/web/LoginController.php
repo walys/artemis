@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\Auth\User;
 use App\Services\Auth\AuthService;
 use App\Services\users\UserService;
+use App\Models\Company\Company;
 
 class Logincontroller extends Controller
 {
@@ -54,8 +55,7 @@ class Logincontroller extends Controller
                 'status' => "422",
                 'errors' => "Email incorreto!"
             ];
-            return response()->json($error
-            );
+            return response()->json($error);
         }
 
         if(Auth::attempt($request->only('email', 'password'))) {
@@ -92,6 +92,19 @@ class Logincontroller extends Controller
             'cnpj' => 'required',
             'country' => 'required',
         ]);
+
+        Company::where('cnpj', removerCaracteresCNPJ($request->cnpj))
+        ->orWhere('email', $request->email)
+        ->first() ? $companyExist = true : $companyExist = false;
+
+        if($companyExist) {
+            $error = [
+                'authorized' => false,
+                'status' => "422",
+                'errors' => "CNPJ  ou E-mail ja cadastrado!"
+            ];
+            return response()->json($error);
+        }
 
         try {
             $userAcessCreated = $this->authService->registerCompanyUser($request);
