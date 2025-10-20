@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Models\auth;
+namespace App\Models\Auth;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\auth\AccessLevelUser;
-use App\Models\auth\UserFilialCompany;
+use App\Models\Auth\AccessLevelUser;
+use App\Models\Auth\UserFilialCompany;
 use App\Models\Company\Company;
+use App\Models\Settings\Country;
+use App\Models\Settings\Language;
 
 class User extends Authenticatable
 {
@@ -29,6 +31,12 @@ class User extends Authenticatable
         'cpf',
         'foto',
         'company_id',
+        'birthday',
+        'phone_mobile',
+        'profile_url',
+        'language_id',
+        'country_id',
+        'biography',
     ];
 
     /**
@@ -65,4 +73,13 @@ class User extends Authenticatable
         return $this->hasMany(UserFilialCompany::class, 'user_id');
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'language_id');
+    }
 }

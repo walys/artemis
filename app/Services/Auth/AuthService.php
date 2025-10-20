@@ -2,8 +2,8 @@
 
 namespace App\Services\Auth;
 
-use App\Models\auth\User;
-use App\Models\auth\UserFilialCompany;
+use App\Models\Auth\User;
+use App\Models\Auth\UserFilialCompany;
 use App\Models\Company\Company;
 use App\Services\Company\CompanyService;
 use App\Services\Company\FilialService;

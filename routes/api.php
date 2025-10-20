@@ -21,6 +21,8 @@ Route::prefix('V1')->group(function(){
 
         #Utils
         Route::get('/cep/{cep}', [UtilController::class, 'getCountries'])->name('cep');
+        Route::get('/languages', [UtilController::class, 'getLanguages'])->name('languages');
+        Route::post('/change-language', [UtilController::class, 'changeLanguage'])->name('change-language');
     });
     
 });

@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller as Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Auth\User;
 
 use function Termwind\render;
 
@@ -27,7 +28,13 @@ class AccountSettingsController extends Controller
 
     public function create(Request $request)
     {
-        return Inertia::render('account-settings/Index');
+        $user = Auth::user();
+        $userAccount = User::where('id', $user->id)->with('country', 'company')->first();
+        // dd($userAccount);
+
+        return Inertia::render('account-settings/Index', [
+            'userAccount' => $userAccount
+        ]);
     }
 
     public function update(Request $request)

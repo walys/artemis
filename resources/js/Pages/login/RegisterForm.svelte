@@ -72,7 +72,7 @@
             bind:value={fomDataRegister.country}
             placeholder="Selecione um local"
             showChevron 
-            />
+        />
     </div>
 
     <div class="d-flex justify-content-end">

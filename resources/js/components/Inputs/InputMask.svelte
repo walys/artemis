@@ -15,13 +15,13 @@
     export let isValid = false;
     export let onChange = () => {};
     export let onKeyup = () => {};
+    export let required = false;
 
     // converte numero americano para brasileiro
     if(type == "decimal") {
         value = value ? value.toString().replace(".", ",") : "";
     }
 </script>
-
 
 {#if type == "decimal"}
 
@@ -46,7 +46,19 @@
         on:change={onChange}
         on:keyup={onKeyup}
     />
+{:else if type == "text"}
 
+    <!-- texto -->
+    <input
+        type="text"
+        class="form-control"
+        class:is-invalid={hasError}
+        class:is-valid={isValid}
+        {placeholder}
+        bind:value
+        disabled={disabled}
+        on:change={onChange}
+    /> 
 {:else if type == "phone"}
 
     <!-- telefone -->
@@ -91,6 +103,7 @@
     <!-- cpf -->
     <input
         type="text"
+        required={required}
         use:cleave={{
             blocks: [3, 3, 3, 2],
             delimiters: ['.', '.', '-'],
@@ -109,6 +122,7 @@
     <!-- cnpj -->
     <input
         type="text"
+        required={required}
         use:cleave={{
             blocks: [2, 3, 3,4, 2],
             delimiters: ['.', '.','/', '-'],
@@ -128,6 +142,7 @@
     <!-- rg -->
     <input
         type="text"
+        required={required}
         use:cleave={{
             blocks: [2, 3, 3, 1],
             delimiters: ['.', '.', '-'],
@@ -147,6 +162,7 @@
 <!-- título de eleitor -->
 <input
     type="text"
+    required={required}
     use:cleave={{
         blocks: [3, 3, 3, 2],
         delimiters: ['.', '.', '-'],
@@ -166,6 +182,7 @@
     <!-- CNH -->
     <input
         type="text"
+        required={required}
         use:cleave={{
             blocks: [3, 3, 3, 2],
             delimiters: ['.', '.', '.', '-'],
@@ -185,6 +202,7 @@
 <!-- CTPS -->
 <input
     type="text"
+    required={required}
     use:cleave={{
         blocks: [3, 5, 1],
         delimiters: ['.', '.', '.'],
@@ -204,6 +222,7 @@
 <!-- PIS/PASEP -->
 <input
     type="text"
+    required={required}
     use:cleave={{
         blocks: [3, 5, 2, 2],
         delimiters: ['.', '.', '-', '.'],
@@ -219,15 +238,9 @@
 />
 
 {:else if type == "date"}
-
-    <!-- cpf -->
     <input
-        type="text"
-        use:cleave={{
-            blocks: [2, 2, 4],
-            delimiter: '/',
-            numericOnly: true
-        }}
+        type="date"
+        required={required}
         class="form-control"
         class:is-invalid={hasError}
         class:is-valid={isValid}
@@ -238,15 +251,9 @@
     />
 
 {:else if type == "datetime"}
-
-    <!-- cpf -->
     <input
-        type="text"
-        use:cleave={{
-            blocks: [2, 2, 4, 2, 2, 2],
-            delimiters: ['/', '/', ' ', ':', ':'],
-            numericOnly: true
-        }}
+        type="datetime"
+        required={required}
         class="form-control"
         class:is-invalid={hasError}
         class:is-valid={isValid}

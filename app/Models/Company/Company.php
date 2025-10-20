@@ -2,8 +2,8 @@
 
 namespace App\Models\Company;
 
-use App\Models\address\Country;
-use App\Models\auth\UserFilialCompany;
+use App\Models\Settings\Country;
+use App\Models\Auth\UserFilialCompany;
 use App\Models\Company\Filial;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

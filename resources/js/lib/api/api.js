@@ -40,28 +40,63 @@ export async function getDataParams(endpoint, params) {
 }
 
 // Função para realizar requisição POST
-export async function postData(baseUrl, endpoint, data) {
-    let csrf_token = '';
-    accessTokenXSRF(baseUrl).then(token => {
-        csrf_token = token
-    });
-    console.log(`${baseUrl}${endpoint}`, 'csrf_token', csrf_token);
-    const res = await fetch(`${baseUrl}${endpoint}`, {
-        method: 'POST',
-        headers: {
+// export async function postData(endpoint, data) {
+//     let csrf_token = '';
+//     accessTokenXSRF(baseUrl).then(token => {
+//         csrf_token = token
+//     });
+//     // const csrfData = await csrfResponse.json();
+//     const res = await fetch(`${endpoint}`, {
+//         method: 'POST',
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json",
+//             "Access-Control-Allow-Origin": "*",
+//             "X-XSRF-TOKEN": csrf_token,
+//         },
+//         credentials: 'include',
+//         body: JSON.stringify(data),
+//     }).catch((error) => console.error('Error:', error));
+//     return await res.json();
+// }
+
+export async function postData(endpoint, data) {
+    try {
+        // Obter o CSRF token de forma síncrona
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        
+        const headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
             "Access-Control-Allow-Origin": "*",
-            "X-XSRF-TOKEN": csrf_token,
-        },
-        credentials: 'include',
-        body: JSON.stringify(data),
-    }).catch((error) => console.error('Error:', error));
-    return await res.json();
+        };
+
+        // Adicionar CSRF token se disponível
+        if (csrfToken) {
+            headers["X-CSRF-TOKEN"] = csrfToken;
+        }
+
+        const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: headers,
+            credentials: 'include', // Importante para cookies/sessions
+            body: JSON.stringify(data),
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error('Error in postData:', error);
+        throw error;
+    }
 }
 
 // Função para realizar requisição PUT
 export async function putData(endpoint, data) {
+    
     const res = await fetch(`${API_URL}${endpoint}`, {
         method: 'PUT',
         headers: {

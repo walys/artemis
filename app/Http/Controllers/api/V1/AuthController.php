@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api\V1;
 
-use App\Models\auth\User;
+use App\Models\Auth\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use App\Http\Controllers\Controller;
@@ -96,6 +96,9 @@ class AuthController extends Controller
         $acess = session()->all();
         $user->company;
         $user->accessLevel;
+        $user->country;
+        $user->language;
+        
         $names = explode(' ', $user->name);
         $firstName = $names[0];
         $secondName = $names[1];
@@ -107,6 +110,8 @@ class AuthController extends Controller
             'foto'  => $user->foto,
             'company' => $user->company,
             'accessLevel' => $user->accessLevel,
+            'country' => $user->country,
+            'language' => $user->language
         ];
 
         return response()->json($userAutenticated, 200);

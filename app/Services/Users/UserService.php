@@ -2,7 +2,7 @@
 
 namespace App\Services\users;
 
-use App\Models\auth\User;
+use App\Models\Auth\User;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

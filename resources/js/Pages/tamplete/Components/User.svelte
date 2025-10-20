@@ -1,6 +1,9 @@
 <script>
-    export let appUserData = {};
-    console.log('User',appUserData);
+    export let appUserData;
+    function logout() {
+        localStorage.clear();
+        window.location.href = "/logout";
+    }
 </script>
 <li class="nav-item navbar-dropdown dropdown-user dropdown">
     <a
@@ -53,7 +56,7 @@
         <div class="dropdown-divider my-1"></div>
     </li>
     <li>
-        <a class="dropdown-item" href="#">
+        <a class="dropdown-item" href="#" on:click={logout}>
         <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Sair</span>
         </a>
     </li>

@@ -2,7 +2,7 @@
 
 namespace App\Services\Company;
 
-use App\Models\address\Country;
+use App\Models\Settings\Country;
 use App\Models\Company\Company;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Request;

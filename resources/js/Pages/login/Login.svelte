@@ -1,17 +1,9 @@
 <script>
     import LoginForm from './LoginForm.svelte';
     import RegisterForm from './RegisterForm.svelte';
-    import { getData, postData } from "$lib/api/api.js";
-    import { onMount } from "svelte";
 
     let isLogin = true;
     let isRegister = false;
-
-    // onMount(() => {
-    //   if (localStorage.getItem('token')) {
-    //       window.location.href = '/dashboard';
-    //   }
-    // });
 
     function toggleForm() {
         isLogin = !isLogin;
@@ -42,11 +34,6 @@
                                 class="img-fluid mb-2"
                             />
                         </div>
-                        <!-- <h3>Artemis</h3>
-                        
-                        <p class="mb-4">
-                            Seja bem vindo, espero proporcinar uma boa experiência!
-                        </p> -->
                     </div>
                     {#if isLogin}
                         <LoginForm />

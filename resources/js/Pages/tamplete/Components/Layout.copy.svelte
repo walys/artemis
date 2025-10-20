@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { getData, postData } from "$lib/api/api.js";
+    import { getData } from "$lib/api/api.js";
 
     let users = {};
     export let title;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\auth;
+namespace App\Models\Auth;
 
-use App\Models\auth\User;
+use App\Models\Auth\User;
 use App\Models\Company\Filial;
 use App\Models\Company\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

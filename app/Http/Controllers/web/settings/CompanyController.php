@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\web\settings;
 
-use App\Models\auth\User;
+use App\Models\Auth\User;
 use function Termwind\render;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;

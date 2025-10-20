@@ -3,7 +3,6 @@
     import Title from "$components/Title/Title.svelte";
     import { onMount } from "svelte";
     import { page } from '@inertiajs/svelte';
-    import { getData, postData, getDataParams } from "$lib/api/api.js";
     import Account from "./Components/Account.svelte";
     import Security from "./Components/Security.svelte";
     import BillingPlans from "./Components/BillingPlans.svelte";
@@ -20,9 +19,33 @@
     let billingPlansActive = "";
     let notificationsActive = "";
     let connectionsActive = "";
+    let userDataForma = {
+        name: $page.props?.userAccount?.name,
+        email: $page.props?.userAccount?.email,
+        celular: $page.props?.userAccount?.celular,
+        cpf: $page.props?.userAccount?.cpf, 
+        foto: $page.props?.userAccount?.foto, 
+        email_verified_at: $page.props?.userAccount?.email_verified_at,
+        remember_token: $page.props?.userAccount?.remember_token, 
+        created_at: $page.props?.userAccount?.created_at, 
+        updated_at: $page.props?.userAccount?.updated_at, 
+        company_id: $page.props?.userAccount?.company_id, 
+        birthday: $page.props?.userAccount?.birthday,
+        delete_at: $page.props?.userAccount?.delete_at,
+        country_id: $page.props?.userAccount?.country_id,
+        language_id: $page.props?.userAccount?.language_id,
+        biography: $page.props?.userAccount?.biography,
+        phone_mobile: $page.props?.userAccount?.phone_mobile,
+        profile_url: $page.props?.userAccount?.profile_url,
+        country: {
+            value: $page.props?.userAccount?.country.id,
+            label: $page.props?.userAccount?.country.name
+        }
+    }
 
     onMount(() => {
         toggleForm('account');
+        console.log('userDataForma', userDataForma);
     });
 
     function toggleForm(params) {
@@ -126,17 +149,26 @@
                             </li>
                         </ul>
                     </div> 
-                    {#if account}
-                        <Account />
-                    {:else if security}
-                        <Security />
-                    {:else if billingPlans}
-                        <BillingPlans />
-                    {:else if notifications}
-                        <Notifications />
-                    {:else if connections}
-                        <Connections />
-                    {/if}
+                    <div class="card mb-6">
+                        {#if account}
+                            <Account {userDataForma}/>
+                        {:else if security}
+                            <Security />
+                        {:else if billingPlans}
+                            <BillingPlans />
+                        {:else if notifications}
+                            <Notifications />
+                        {:else if connections}
+                            <Connections />
+                        {/if}
+                        <hr/>
+                        <div class="card-body pt-4">
+                            <div class="mt-6">
+                                <button type="submit" class="btn btn-primary me-3">Salvar alterações</button>
+                                <button type="reset" class="btn btn-secondary">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>    
             </div>
         </div>
