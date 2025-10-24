@@ -36,14 +36,12 @@
             });
 
             lang = response.language.code;
-            localStorage.setItem('lang', lang);
+            localStorage.setItem("lang", String(lang));
             appUserData = response;
             // console.log("Usuário autenticado:", appUserData);
-            console.log("tradutor:", _('casa'), lang);
         } catch (error) {
             localStorage.setItem('lang', lang);
             console.log("Erro ao obter usuário autenticado:", error);
-            //await logout();
         }
     }
 

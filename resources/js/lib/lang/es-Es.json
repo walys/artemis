@@ -1,3 +1,40 @@
 {
-    "casa": "Casa"
+    "Botões": "Botones",
+    "Cancelar": "Cancelar",
+    "Salvar": "Guardar",
+    "Salvar Alterações": "Guardar Cambios",
+    "Entrar": "Entrar",
+    "Carregar nova foto": "Cargar nueva foto",
+    "Redefinir": "Redefinir",
+
+    "Configurações da Conta": "Configuraciones de la Cuenta",
+    "Conta" : "Cuenta",
+    "Segurança": "Seguridad",
+    "Faturamento & Planos": "Facturación & Planes",
+    "Notificações": "Notificaciones",
+    "Conexões": "Conexiones",
+    "Permitido JPG, GIF ou PNG. Tamanho máximo de 800KB": "Permitido JPG, GIF ou PNG. Tamanho max de 800KB",
+
+    "Informações de cadastro": "Información de Registro",
+    "Nome": "Nombre",
+    "E-mail": "Correo electrónico",
+    "CPF": "CPF",
+    "Data de Nascimento": "Fecha de Nacimiento",
+    "País": "País",
+    "Cidade": "Ciudad",
+    "Endereço": "Dirección",
+    "Telefone": "Teléfono",
+    "Cadastrar": "Registrar",
+    "Login": "Iniciar Sesión",
+    "Senha": "Contraseña",
+    "Confirmar Senha": "Confirmar Contraseña",
+
+    "placeholders": "placeholders",
+    "Informe a data de nascimento": "Por favor, ingrese la fecha de nacimiento",
+    "Informe o CPF": "Por favor, ingrese el CPF",
+    "Informe o e-mail": "Por favor, ingrese el correo electrónico",
+    "Informe o nome": "Por favor, ingrese el nombre",
+    "Informe a senha": "Por favor, ingrese la contraseña",
+    "Informe o telefone": "Por favor, ingrese el teléfono",
+    "Selecione um país": "Seleccione un país"
 }

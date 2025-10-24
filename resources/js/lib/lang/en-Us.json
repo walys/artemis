@@ -1,3 +1,40 @@
 {
-    "casa": "Home"
+    "Botões": "Buttons",
+    "Cancelar": "Cancel",
+    "Salvar": "Save",
+    "Salvar Alterações": "Save Changes",
+    "Entrar": "Login",
+    "Carregar nova foto": "Load new photo",
+    "Redefinir": "Reset",
+
+    "Configurações da Conta": "Account Settings",
+    "Conta" : "Account",
+    "Segurança": "Security",
+    "Faturamento & Planos": "Billing & Plans",
+    "Notificações": "Notifications",
+    "Conexões": "Connections",
+    "Permitido JPG, GIF ou PNG. Tamanho máximo de 800KB": "Allowed JPG, GIF or PNG. Max size of 800KB",
+
+    "Informações de cadastro": "Registration Information",
+    "Nome": "Name",
+    "E-mail": "E-mail",
+    "CPF": "CPF",
+    "Data de Nascimento": "Birth Date",
+    "País": "Country",
+    "Cidade": "City",
+    "Endereço": "Address",
+    "Telefone": "Phone",
+    "Cadastrar": "Register",
+    "Login": "Login",
+    "Senha": "Password",
+    "Confirmar Senha": "Confirm Password",
+
+    "placeholders": "Please enter",
+    "Informe a data de nascimento": "Please enter your birth date",
+    "Informe o CPF": "Please enter your CPF",
+    "Informe o e-mail": "Please enter your e-mail",
+    "Informe o nome": "Please enter your name",
+    "Informe a senha": "Please enter your password",
+    "Informe o telefone": "Please enter your phone",
+    "Selecione um país": "Select a country"
 }

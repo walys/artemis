@@ -12,14 +12,14 @@
         try {
             await postData(endpointChangeLanguage, {language: language}).then((response) => {
                 const newLanguage = response?.language?.code;
-                localStorage.removeItem('lang');
-                localStorage.setItem('lang', newLanguage);
-                const lang = localStorage.getItem('lang');
-                console.log('newLanguage', lang);
-                location.reload();
+                localStorage.removeItem("lang");
+                localStorage.setItem("lang", newLanguage);
+                const lang = localStorage.getItem("lang");
             });
         } catch (error) {
             console.error('Erro ao alterar idioma:', error);
+        }finally {
+            location.reload();
         }
     }
 </script>

@@ -1,4 +1,5 @@
 <script>
+    import {_} from "$lib/lang/lang.js";
     import Layout from "$tamplete/Layout.svelte";
     import Title from "$components/Title/Title.svelte";
     import { onMount } from "svelte";
@@ -120,7 +121,7 @@
 </script>
 
 <Layout>
-    <Title title="Account Settings" />
+    <Title title="{_("Configurações da Conta")}" />
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="row">
@@ -129,23 +130,23 @@
                         <ul class="nav nav-pills flex-column flex-md-row mb-6 gap-md-0 gap-2">
                             <li class="nav-item">
                                 <button class="nav-link {accountActive}" href="#!" on:click={() => toggleForm('account')}>
-                                    <i class="icon-base bx bx-user icon-sm me-1_5"></i> Conta</button>
+                                    <i class="icon-base bx bx-user icon-sm me-1_5"></i> {_("Conta")}</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link {securityActive}" href="#!" on:click={() => toggleForm('security')}>
-                                    <i class="icon-base bx bx-lock-alt icon-sm me-1_5"></i> Seguranca</button>
+                                    <i class="icon-base bx bx-lock-alt icon-sm me-1_5"></i> {_("Segurança")}</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link {billingPlansActive}" href="#!" on:click={() => toggleForm('billingPlans')}>
-                                    <i class="icon-base bx bx-detail icon-sm me-1_5"></i>  Faturamento & Planos</button>
+                                    <i class="icon-base bx bx-detail icon-sm me-1_5"></i>  {_("Faturamento & Planos")}</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link {notificationsActive}" href="#!" on:click={() => toggleForm('notifications')}>
-                                    <i class="icon-base bx bx-bell icon-sm me-1_5"></i> Notificações</button>
+                                    <i class="icon-base bx bx-bell icon-sm me-1_5"></i> {_("Notificações")}</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link {connectionsActive}" href="#!" on:click={() => toggleForm('connections')}>
-                                    <i class="icon-base bx bx-link-alt icon-sm me-1_5"></i> Conexões</button>
+                                    <i class="icon-base bx bx-link-alt icon-sm me-1_5"></i> {_("Conexões")}</button>
                             </li>
                         </ul>
                     </div> 
@@ -164,8 +165,8 @@
                         <hr/>
                         <div class="card-body pt-4">
                             <div class="mt-6">
-                                <button type="submit" class="btn btn-primary me-3">Salvar alterações</button>
-                                <button type="reset" class="btn btn-secondary">Cancelar</button>
+                                <button type="submit" class="btn btn-primary me-3">{_("Salvar Alterações")}</button>
+                                <button type="reset" class="btn btn-secondary">{_("Cancelar")}</button>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 <script>
+    import {_} from "$lib/lang/lang.js";
     import { onMount } from "svelte";
     import Col from "$components/Form/Col.svelte";
     import InputMask from "$components/Inputs/InputMask.svelte";
@@ -26,37 +27,37 @@
         <img src="/sneat/assets/img/avatars/1.png" alt="user-avatar" class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
         <div class="button-wrapper">
             <label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-                <span class="d-none d-sm-block">Carregar nova foto</span>
+                <span class="d-none d-sm-block">{_("Carregar nova foto")}</span>
                 <i class="icon-base bx bx-upload d-block d-sm-none"></i>
                 <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
             </label>
             <button type="button" class="btn btn-secondary account-image-reset mb-4">
                 <i class="icon-base bx bx-reset d-block d-sm-none"></i>
-                <span class="d-none d-sm-block">Redefinir</span>
+                <span class="d-none d-sm-block">{_("Redefinir")}</span>
             </button>
-            <div>Permitido JPG, GIF ou PNG. Tamanho máximo de 800K</div>
+            <div>{_("Permitido JPG, GIF ou PNG. Tamanho máximo de 800K")}</div>
         </div>
     </div>
 </div>
 <div class="card-body pt-4">
     <div class="row g-6">
 
-        <Col title="Nome" forName="Nome" classInput="col-md-6 form-control-validation">
+        <Col title={_("Nome")} forName={_("Nome")} classInput="col-md-6 form-control-validation">
             <InputMask 
                 type="text" 
                 bind:value={userDataForma.name}
-                placeholder="Informe o nome"
+                placeholder={_("Informe o nome")}
                 hasError={errors?.name}
                 required={true}
             />
             <span class="text-danger">{errors?.name || ""}</span>
         </Col>
 
-        <Col title="E-mail" forName="E-mail" classInput="col-md-6 form-control-validation">
+        <Col title={_("E-mail")} forName={_("E-mail")} classInput="col-md-6 form-control-validation">
             <InputMask
                 type="text" 
                 bind:value={userDataForma.email}
-                placeholder="Informe o E-mail"
+                placeholder={_("Informe o E-mail")}
                 hasError={errors?.email}
                 required={true}
             />
@@ -74,7 +75,7 @@
             <span class="text-danger">{errors?.cpf || ""}</span>
         </Col>
 
-        <Col title="Celular" forName="Celular" classInput="col-md-6 form-control-validation">
+        <Col title="{_("Celular")}" forName="{_("Celular")}" classInput="col-md-6 form-control-validation">
             <InputMask
                 type="phone" 
                 bind:value={userDataForma.phone_mobile}
@@ -85,23 +86,23 @@
             <span class="text-danger">{errors?.phone_mobile || ""}</span>
         </Col>
 
-        <Col title="Data de Nascimento" forName="Data de Nascimento" classInput="col-md-6 form-control-validation">
+        <Col title={_("Data de Nascimento")} forName={_("Data de Nascimento")} classInput="col-md-6 form-control-validation">
             <InputMask
                 type="date" 
                 bind:value={userDataForma.birthday}
-                placeholder="Informe a data de nascimento"
+                placeholder={_("Informe a data de nascimento")}
                 hasError={errors?.birthday}
                 required={true}
             />
             <span class="text-danger">{errors?.birthday || ""}</span>
         </Col>
 
-        <Col title="País" forName="País" classInput="col-md-6 form-control-validation">
+        <Col title={_("País")} forName={_("País")} classInput="col-md-6 form-control-validation">
             <Select
                 class="form-control last mb-4"
                 items={countryList}
                 bind:value={userDataForma.country}
-                placeholder="Selecione um local"
+                placeholder={_("Selecione um país")}
                 showChevron 
             />
             <span class="text-danger">{errors?.country_id || ""}</span>

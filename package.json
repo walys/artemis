@@ -20,9 +20,10 @@
         "js-cookie": "^3.0.5",
         "sass": "1.77.6",
         "svelte": "^4.2.19",
+        "svelte-cleavejs": "^1.0.3",
+        "svelte-i18n": "^4.0.1",
         "svelte-input-mask": "^1.1.0",
         "svelte-select": "^5.0.0-beta.17",
-        "sweetalert2": "^11.15.10",
-        "svelte-cleavejs": "^1.0.3"
+        "sweetalert2": "^11.15.10"
     }
 }
