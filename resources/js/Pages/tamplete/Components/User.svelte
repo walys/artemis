@@ -1,4 +1,5 @@
 <script>
+    import {_} from "$lib/lang/lang.js";
     export let appUserData;
     function logout() {
         localStorage.clear();
@@ -24,7 +25,7 @@
             </div>
             </div>
             <div class="flex-grow-1">
-            <h6 class="mb-0">{appUserData.name}</h6>
+            <h6 class="mb-0">{_(appUserData.name)}</h6>
             <small class="text-body-secondary">{appUserData.accessLevel?.level_name}</small>
             </div>
         </div>
@@ -35,19 +36,19 @@
     </li>
     <li>
         <a class="dropdown-item" href="#">
-        <i class="icon-base bx bx-user icon-md me-3"></i><span>Meu perfil</span>
+        <i class="icon-base bx bx-user icon-md me-3"></i><span>{_("Meu perfil")}</span>
         </a>
     </li>
     <li>
         <a class="dropdown-item" href="#">
-        <i class="icon-base bx bx-cog icon-md me-3"></i><span>Settings</span>
+        <i class="icon-base bx bx-cog icon-md me-3"></i><span>{_("Configurações")}</span>
         </a>
     </li>
     <li>
         <a class="dropdown-item" href="#">
         <span class="d-flex align-items-center align-middle">
-            <i class="flex-shrink-0 icon-base bx bx-credit-card icon-md me-3"></i
-            ><span class="flex-grow-1 align-middle">Billing Plan</span>
+            <i class="flex-shrink-0 icon-base bx bx-credit-card icon-md me-3"></i>
+            <span class="flex-grow-1 align-middle">{_("Meus pagamentos")}</span>
             <span class="flex-shrink-0 badge rounded-pill bg-danger">4</span>
         </span>
         </a>
@@ -57,7 +58,7 @@
     </li>
     <li>
         <a class="dropdown-item" href="#" on:click={logout}>
-        <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Sair</span>
+        <i class="icon-base bx bx-power-off icon-md me-3"></i><span>{_("Sair")}</span>
         </a>
     </li>
     </ul>

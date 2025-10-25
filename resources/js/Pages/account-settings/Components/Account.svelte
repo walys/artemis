@@ -8,13 +8,61 @@
     import { page } from '@inertiajs/svelte';
 
     export let userDataForma;
+
     let errors = {};
     let apiUrl = $page.props.app?.apiUrl;
     let countryList = [];
     let endPointCountry = apiUrl + "/countries";
+    let endPointLanguages = apiUrl + "/languages";
+    let languageLists = [];
+    // Referência para o input file
+    let fileInput;
+
+    // Imagem preview
+    let imagePreview = userDataForma.profile_url || "/sneat/assets/img/avatars/1.png";
+
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Verifica o tipo do arquivo
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+            if (!allowedTypes.includes(file.type)) {
+                alert(_("Tipo de arquivo não permitido. Use JPG, GIF ou PNG."));
+                return;
+            }
+
+            // Verifica o tamanho do arquivo (800KB)
+            if (file.size > 800 * 1024) {
+                alert(_("Arquivo muito grande. Tamanho máximo: 800KB para JPG, GIF ou PNG. O tamanho atual: " + (file.size / 1024).toFixed(2) + "KB"));
+                return;
+            }
+
+            // Cria uma URL para preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview = e.target.result;
+                userDataForma.profile_url = e.target.result; // Armazena a URL base64
+                userDataForma.profile_file = file; // Armazena o arquivo também se precisar
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function resetImage() {
+        imagePreview = "/sneat/assets/img/avatars/1.png";
+        userDataForma.profile_url = null;
+        userDataForma.profile_file = null;
+        if (fileInput) fileInput.value = '';
+    }
+
+
     onMount(() => {
         getData(endPointCountry).then((response) => {
             countryList = response;
+        });
+
+        getData(endPointLanguages).then((response) => {
+            languageLists = response;
         });
     });
 
@@ -24,14 +72,22 @@
 
 <div class="card-body">
     <div class="d-flex align-items-start align-items-sm-center gap-6 pb-4 border-bottom">
-        <img src="/sneat/assets/img/avatars/1.png" alt="user-avatar" class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
+        <img src={imagePreview} alt="user-avatar" class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
         <div class="button-wrapper">
             <label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
                 <span class="d-none d-sm-block">{_("Carregar nova foto")}</span>
                 <i class="icon-base bx bx-upload d-block d-sm-none"></i>
-                <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
+                <input 
+                    type="file" 
+                    id="upload" 
+                    class="account-file-input" 
+                    hidden 
+                    accept="image/png, image/jpeg, image/jpg, image/gif" 
+                    bind:this={fileInput}
+                    on:change={handleFileUpload}
+                />
             </label>
-            <button type="button" class="btn btn-secondary account-image-reset mb-4">
+            <button type="button" class="btn btn-secondary account-image-reset mb-4" on:click={resetImage}>
                 <i class="icon-base bx bx-reset d-block d-sm-none"></i>
                 <span class="d-none d-sm-block">{_("Redefinir")}</span>
             </button>
@@ -108,5 +164,17 @@
             <span class="text-danger">{errors?.country_id || ""}</span>
         </Col>
 
+        <Col title={_("Idioma")} forName={_("Idioma")} classInput="col-md-6 form-control-validation">
+            <Select
+                class="form-control last mb-4"
+                items={languageLists}
+                bind:value={userDataForma.language}
+                placeholder={_("Selecione um idioma")}
+                showChevron 
+            />
+            <span class="text-danger">{errors?.language_id || ""}</span>
+        </Col>
+
+        
     </div>
 </div>

@@ -1,4 +1,6 @@
 {
+    "Carregando sistema": "Carregando sistema",
+
     "Botões": "Botões",
     "Cancelar": "Cancelar",
     "Salvar": "Guardar",
@@ -6,6 +8,21 @@
     "Entrar": "Entrar",
     "Carregar nova foto": "Carregar nova foto",
     "Redefinir": "Redefinir",
+
+    "Menu": "Menu",
+    "Dashboard": "Dashboard",
+    "Meu perfil": "Meu perfil",
+    "Configurações": "Configurações",
+    "Meus pagamentos": "Meus pagamentos",
+    "Sair": "Sair",
+
+    "Acceso de usuário": "Acceso de usuário",
+    "Super Administrador": "Super Administrador",
+    "Administrador": "Administrador",
+    "Cliente": "Cliente",
+    "Estudante": "Estudante",
+    "Patologista": "Patologista",
+    "Colaborador": "Colaborador",
 
     "Configurações da Conta": "Configurações da Conta",
     "Conta" : "Conta",
@@ -24,10 +41,12 @@
     "Cidade": "Cidade",
     "Endereço": "Endereço",
     "Telefone": "Telefone",
+    "Celular": "Celular",
     "Cadastrar": "Cadastrar",
     "Login": "Login",
     "Senha": "Senha",
     "Confirmar Senha": "Confirmar Senha",
+    "Idioma": "Idioma",
 
     "placeholders": "placeholders",
     "Informe a data de nascimento": "Informe a data de nascimento",
@@ -36,5 +55,6 @@
     "Informe o nome": "Informe o nome",
     "Informe a senha": "Informe a senha",
     "Informe o telefone": "Informe o telefone",
-    "Selecione um país": "Selecione um país"
+    "Selecione um país": "Selecione um país",
+    "Selecione um idioma": "Selecione um idioma"
 }

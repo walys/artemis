@@ -1,4 +1,6 @@
 {
+    "Carregando sistema": "Cargando sistema",
+
     "Botões": "Botones",
     "Cancelar": "Cancelar",
     "Salvar": "Guardar",
@@ -6,6 +8,21 @@
     "Entrar": "Entrar",
     "Carregar nova foto": "Cargar nueva foto",
     "Redefinir": "Redefinir",
+
+    "Menu": "Menu",
+    "Dashboard": "Dashboard",
+    "Meu perfil": "Mi Perfil",
+    "Configurações": "Configuraciones",
+    "Meus pagamentos": "Mis pagos",
+    "Sair": "Salir",
+
+    "Acceso de usuário": "Acceso de usuario",
+    "Super Administrador": "Super Admin",
+    "Administrador": "Administrator",
+    "Cliente": "Cliente",
+    "Estudante": "Alumno",
+    "Patologista": "Patólogo",
+    "Colaborador": "Colaborador",
 
     "Configurações da Conta": "Configuraciones de la Cuenta",
     "Conta" : "Cuenta",
@@ -24,10 +41,12 @@
     "Cidade": "Ciudad",
     "Endereço": "Dirección",
     "Telefone": "Teléfono",
+    "Celular": "Celular",
     "Cadastrar": "Registrar",
     "Login": "Iniciar Sesión",
     "Senha": "Contraseña",
     "Confirmar Senha": "Confirmar Contraseña",
+    "Idioma": "Idioma",
 
     "placeholders": "placeholders",
     "Informe a data de nascimento": "Por favor, ingrese la fecha de nacimiento",
@@ -36,5 +55,6 @@
     "Informe o nome": "Por favor, ingrese el nombre",
     "Informe a senha": "Por favor, ingrese la contraseña",
     "Informe o telefone": "Por favor, ingrese el teléfono",
-    "Selecione um país": "Seleccione un país"
+    "Selecione um país": "Seleccione un país",
+    "Selecione um idioma": "Seleccione un idioma"
 }

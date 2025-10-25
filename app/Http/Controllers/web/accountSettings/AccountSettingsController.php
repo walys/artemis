@@ -29,7 +29,7 @@ class AccountSettingsController extends Controller
     public function create(Request $request)
     {
         $user = Auth::user();
-        $userAccount = User::where('id', $user->id)->with('country', 'company')->first();
+        $userAccount = User::where('id', $user->id)->with('country', 'company', 'language')->first();
         // dd($userAccount);
 
         return Inertia::render('account-settings/Index', [

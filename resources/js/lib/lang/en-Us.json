@@ -1,4 +1,6 @@
 {
+    "Carregando sistema": "Loading system",
+
     "Botões": "Buttons",
     "Cancelar": "Cancel",
     "Salvar": "Save",
@@ -6,6 +8,21 @@
     "Entrar": "Login",
     "Carregar nova foto": "Load new photo",
     "Redefinir": "Reset",
+
+    "Menu": "Menu",
+    "Dashboard": "Dashboard",
+    "Meu perfil": "My Profile",
+    "Configurações": "Settings",
+    "Meus pagamentos": "Billing Plan",
+    "Sair": "Logout",
+
+    "Acceso de usuário": "User access",
+    "Super Administrador": "Super Admin",
+    "Administrador": "Administrator",
+    "Cliente": "Client",
+    "Estudante": "Student",
+    "Patologista": "Pathologist",
+    "Colaborador": "Collaborator",
 
     "Configurações da Conta": "Account Settings",
     "Conta" : "Account",
@@ -24,10 +41,12 @@
     "Cidade": "City",
     "Endereço": "Address",
     "Telefone": "Phone",
+    "Celular": "Mobile",
     "Cadastrar": "Register",
     "Login": "Login",
     "Senha": "Password",
     "Confirmar Senha": "Confirm Password",
+    "Idioma": "Language",
 
     "placeholders": "Please enter",
     "Informe a data de nascimento": "Please enter your birth date",
@@ -36,5 +55,6 @@
     "Informe o nome": "Please enter your name",
     "Informe a senha": "Please enter your password",
     "Informe o telefone": "Please enter your phone",
-    "Selecione um país": "Select a country"
+    "Selecione um país": "Select a country",
+    "Selecione um idioma": "Select a language"
 }

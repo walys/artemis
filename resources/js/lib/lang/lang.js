@@ -10,7 +10,7 @@ export function _(write) {
         'en-US': langEn,  // Mudei para en-US
         'es-ES': langEs   // Mudei para es-ES
     };
-    
-    const selectedLang = translations[lang];
+    // console.log('lang', translations[lang]);
+    const selectedLang = translations[lang] || translations['pt-BR'];
     return selectedLang[write] || write;
 }

@@ -1,9 +1,10 @@
 <script>
     import {_} from "$lib/lang/lang.js";
+    import { onMount } from "svelte";
     import Layout from "$tamplete/Layout.svelte";
     import Title from "$components/Title/Title.svelte";
-    import { onMount } from "svelte";
     import { page } from '@inertiajs/svelte';
+    import Form from "$components/Form/Form.svelte";
     import Account from "./Components/Account.svelte";
     import Security from "./Components/Security.svelte";
     import BillingPlans from "./Components/BillingPlans.svelte";
@@ -41,12 +42,15 @@
         country: {
             value: $page.props?.userAccount?.country.id,
             label: $page.props?.userAccount?.country.name
+        },
+        language: {
+            value: $page.props?.userAccount?.language.id,
+            label: $page.props?.userAccount?.language.name
         }
     }
 
     onMount(() => {
         toggleForm('account');
-        console.log('userDataForma', userDataForma);
     });
 
     function toggleForm(params) {
@@ -149,7 +153,7 @@
                                     <i class="icon-base bx bx-link-alt icon-sm me-1_5"></i> {_("Conexões")}</button>
                             </li>
                         </ul>
-                    </div> 
+                    </div>
                     <div class="card mb-6">
                         {#if account}
                             <Account {userDataForma}/>
@@ -174,6 +178,4 @@
             </div>
         </div>
         <!-- / Content -->
-         
-
 </Layout>
