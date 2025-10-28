@@ -22,6 +22,7 @@
     let notificationsActive = "";
     let connectionsActive = "";
     let userDataForma = {
+        id: $page.props?.userAccount?.id,
         name: $page.props?.userAccount?.name,
         email: $page.props?.userAccount?.email,
         celular: $page.props?.userAccount?.celular,
@@ -49,6 +50,9 @@
         }
     }
 
+    let isLoading = false;
+    let errors = [];
+    let endpoint = "/settings/account-settings";
     onMount(() => {
         toggleForm('account');
     });
@@ -118,8 +122,12 @@
         }
     }
 
-    let accountData = {
-        
+    function erros(event) {
+        errors = event.detail.errors;
+    }
+
+    function loading(event) {
+        isLoading = event.detail.isLoading;
     }
 
 </script>
@@ -155,24 +163,25 @@
                         </ul>
                     </div>
                     <div class="card mb-6">
-                        {#if account}
-                            <Account {userDataForma}/>
-                        {:else if security}
-                            <Security />
-                        {:else if billingPlans}
-                            <BillingPlans />
-                        {:else if notifications}
-                            <Notifications />
-                        {:else if connections}
-                            <Connections />
-                        {/if}
-                        <hr/>
-                        <div class="card-body pt-4">
-                            <div class="mt-6">
-                                <button type="submit" class="btn btn-primary me-3">{_("Salvar Alterações")}</button>
-                                <button type="reset" class="btn btn-secondary">{_("Cancelar")}</button>
-                            </div>
-                        </div>
+                        <Form
+                            typeForm="normal" 
+                            formData={userDataForma}
+                            on:isLoading={loading}
+                            on:errors={erros}
+                            url={endpoint}
+                        >
+                            {#if account}
+                                <Account {userDataForma} {errors}/>
+                            {:else if security}
+                                <Security {userDataForma} {errors} />
+                            {:else if billingPlans}
+                                <BillingPlans {userDataForma} {errors} />
+                            {:else if notifications}
+                                <Notifications {userDataForma} {errors} />
+                            {:else if connections}
+                                <Connections {userDataForma} {errors} />
+                            {/if}
+                        </Form> 
                     </div>
                 </div>    
             </div>

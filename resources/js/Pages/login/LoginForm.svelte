@@ -27,7 +27,7 @@
     url={endpoint} 
     urlRedirect={urlRedirect}
     on:errors={erros}
-    fomData={fomDataLogin}
+    formData={fomDataLogin}
     on:isLoading={loading}
 >
     <div class="form-group first">

@@ -10,16 +10,16 @@
 
     async function handleLanguage(language) {
         try {
-            await postData(endpointChangeLanguage, {language: language}).then((response) => {
-                const newLanguage = response?.language?.code;
-                localStorage.removeItem("lang");
-                localStorage.setItem("lang", newLanguage);
-                const lang = localStorage.getItem("lang");
-            });
+            const response = await postData(endpointChangeLanguage, {language: language});
+
+            const newLanguage = response?.language?.code;
+            localStorage.removeItem("lang");
+            localStorage.setItem("lang", newLanguage);            
+            // Recarrega apenas se a requisição foi bem-sucedida
+            location.reload();
         } catch (error) {
             console.error('Erro ao alterar idioma:', error);
-        }finally {
-            location.reload();
+            // Opcional: mostrar mensagem de erro para o usuário
         }
     }
 </script>

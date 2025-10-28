@@ -91,7 +91,7 @@
         <div class="clearfix"></div>
 
         <div class="x_content">
-            <Form fomData={companyData}>
+            <Form formData={companyData}>
                 
 
                 <Col title="Nome da empresa *" forName="name_empresa" classInput="col-md-9 col-sm-9 form-group">

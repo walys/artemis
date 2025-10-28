@@ -40,7 +40,7 @@
     url={endpoint} 
     urlRedirect={urlRedirect}
     on:errors={erros}
-    fomData={fomDataRegister}
+    formData={fomDataRegister}
     on:isLoading={loading}
 >
     <div class="form-group first">

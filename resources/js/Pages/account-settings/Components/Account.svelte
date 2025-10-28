@@ -8,14 +8,14 @@
     import { page } from '@inertiajs/svelte';
 
     export let userDataForma;
+    export let errors = {};
 
-    let errors = {};
     let apiUrl = $page.props.app?.apiUrl;
-    let countryList = [];
     let endPointCountry = apiUrl + "/countries";
     let endPointLanguages = apiUrl + "/languages";
     let languageLists = [];
-    // Referência para o input file
+    let countryList = [];
+
     let fileInput;
 
     // Imagem preview
@@ -49,7 +49,7 @@
     }
 
     function resetImage() {
-        imagePreview = "/sneat/assets/img/avatars/1.png";
+        imagePreview = imagePreview;
         userDataForma.profile_url = null;
         userDataForma.profile_file = null;
         if (fileInput) fileInput.value = '';
@@ -64,6 +64,10 @@
         getData(endPointLanguages).then((response) => {
             languageLists = response;
         });
+
+        getData(endPointLanguages).then((response) => {
+            languageLists = response;
+        })
     });
 
 
@@ -104,7 +108,7 @@
                 bind:value={userDataForma.name}
                 placeholder={_("Informe o nome")}
                 hasError={errors?.name}
-                required={true}
+                required={false}
             />
             <span class="text-danger">{errors?.name || ""}</span>
         </Col>
@@ -115,7 +119,7 @@
                 bind:value={userDataForma.email}
                 placeholder={_("Informe o E-mail")}
                 hasError={errors?.email}
-                required={true}
+                required={false}
             />
             <span class="text-danger">{errors?.email || ""}</span>
         </Col>
@@ -126,7 +130,7 @@
                 bind:value={userDataForma.cpf}
                 placeholder="00.000.000-00"
                 hasError={errors?.cpf}
-                required={true}
+                required={false}
             />
             <span class="text-danger">{errors?.cpf || ""}</span>
         </Col>
@@ -137,42 +141,44 @@
                 bind:value={userDataForma.phone_mobile}
                 placeholder="(00) 00000-0000"  
                 hasError={errors?.phone_mobile}
-                required={true}
+                required={false}
             />
             <span class="text-danger">{errors?.phone_mobile || ""}</span>
         </Col>
 
-        <Col title={_("Data de Nascimento")} forName={_("Data de Nascimento")} classInput="col-md-6 form-control-validation">
+        <Col title={_("Data de Nascimento")} forName={_("Data de Nascimento")} classInput="col-md-4 form-control-validation">
             <InputMask
                 type="date" 
                 bind:value={userDataForma.birthday}
                 placeholder={_("Informe a data de nascimento")}
                 hasError={errors?.birthday}
-                required={true}
+                required={false}
             />
             <span class="text-danger">{errors?.birthday || ""}</span>
         </Col>
 
-        <Col title={_("País")} forName={_("País")} classInput="col-md-6 form-control-validation">
+        <Col title={_("País")} forName={_("País")} classInput="col-md-4 form-control-validation">
             <Select
                 class="form-control last mb-4"
+                hasError={errors?.country}
                 items={countryList}
                 bind:value={userDataForma.country}
                 placeholder={_("Selecione um país")}
                 showChevron 
             />
-            <span class="text-danger">{errors?.country_id || ""}</span>
+            <span class="text-danger">{errors?.country || ""}</span>
         </Col>
 
-        <Col title={_("Idioma")} forName={_("Idioma")} classInput="col-md-6 form-control-validation">
+        <Col title={_("Idioma")} forName={_("Idioma")} classInput="col-md-4 form-control-validation">
             <Select
                 class="form-control last mb-4"
                 items={languageLists}
+                hasError={errors?.country}
                 bind:value={userDataForma.language}
                 placeholder={_("Selecione um idioma")}
                 showChevron 
             />
-            <span class="text-danger">{errors?.language_id || ""}</span>
+            <span class="text-danger">{errors?.language || ""}</span>
         </Col>
 
         

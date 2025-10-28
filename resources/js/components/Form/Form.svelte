@@ -1,13 +1,16 @@
 <script>
-    import { getData, postData } from "$lib/api/api.js";
+    import {_} from "$lib/lang/lang.js";
     import { page } from '@inertiajs/svelte';
     import { auth } from "$lib/auth/auth.js";
+    import { getData, postData, putData } from "$lib/api/api.js";
+    import { crud } from "$lib/crud/crud.js";
     import { createEventDispatcher } from 'svelte';
     import sweetalert from "$lib/sweet/sweetalert.js";
 
     export let baseUrl = $page.props.app?.baseUrl;
+    export let apiBaseUrl = $page.props.app?.apiUrl;
 
-    export let fomData = {};
+    export let formData = {};
     export let onSubmit;
     export let loading = false;
     export let disabled = false;
@@ -21,7 +24,8 @@
     export let errorMessage = "";
     let data = {};
   
-    let endpoint = baseUrl + url;
+    let endpointBaseUrl = baseUrl + url;
+    let endpointApiBaseUrl = apiBaseUrl + url;
 
     const dispatch = createEventDispatcher();
 
@@ -35,6 +39,9 @@
         case "register":
           handleRegister();
           break;
+        case "normal":
+          handleCreateOrUpdate();
+          break;
         default:
           break;
       }
@@ -43,8 +50,8 @@
     async function handleLogin()
     {
         try {
-            console.log('fomData', fomData);
-            data = await auth.login(endpoint, fomData?.email, fomData?.password);
+            console.log('formData', formData);
+            data = await auth.login(endpointBaseUrl, formData?.email, formData?.password);
             console.log('data', data);
 
             if(data?.authorized === true){
@@ -69,7 +76,7 @@
     async function handleRegister()
     {
         try {
-            data = await auth.register(endpoint, fomData);
+            data = await auth.register(endpointBaseUrl, formData);
             console.log('data', data);
             if(data?.Authorized === true){
               handleSetItemStorage(data)
@@ -120,8 +127,33 @@
             window.location.href = urlRedirect;
         }
     }
+
+    async function handleCreateOrUpdate() {
+      if(formData.id){
+        data = await crud.put(`${endpointApiBaseUrl}/update`, formData);
+        if(data.sucess === true){
+          console.log('else', data);
+        }else{
+            handleErrors(data)
+        }
+        console.log('response', data);
+      }else{
+          await postData(`${endpointApiBaseUrl}/store`, formData).then((response) => {
+            console.log('response', response);
+          });
+      }
+    }
   </script>
   
   <form on:submit|preventDefault={handleSubmit} class={classForm} >
     <slot />
+    {#if typeForm === "normal"}
+      <hr/>
+      <div class="card-body pt-4">
+          <div class="mt-6">
+              <button type="submit" class="btn btn-primary me-3" on::click={handleCreateOrUpdate}>{_("Salvar Alterações")}</button>
+              <button type="reset" class="btn btn-secondary">{_("Cancelar")}</button>
+          </div>
+      </div>
+    {/if}
   </form>

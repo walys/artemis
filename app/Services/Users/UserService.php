@@ -34,6 +34,13 @@ class UserService
             'access_level_id' => 2,
             'celular' => '(00) 0000-0000',
             'foto' => 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+            'language_id'=> 1,
+            'phone_mobile' => '(00) 0000-0000',
+            'profile_url' => 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+            'country_id' => 26,
+            'biography' => 'User ' . $company->name,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         return $user;
