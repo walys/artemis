@@ -56,5 +56,20 @@
     "Informe a senha": "Informe a senha",
     "Informe o telefone": "Informe o telefone",
     "Selecione um país": "Selecione um país",
-    "Selecione um idioma": "Selecione um idioma"
+    "Selecione um idioma": "Selecione um idioma",
+
+    "Espécies": "Espécies",
+    "Especie": "Especie",
+    "Cão": "Cão",
+    "Gato": "Gato",
+    "Equino": "Equino",
+    "Equino": "Bovino",
+
+    "Raças": "Raças",
+    "Raca": "Raca",
+
+    "Sexo": "Sexo",
+    "Macho": "Macho",
+    "Femea": "Femea",
+    "Indeterminado": "Indeterminado"
 }

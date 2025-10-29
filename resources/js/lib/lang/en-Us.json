@@ -56,5 +56,20 @@
     "Informe a senha": "Please enter your password",
     "Informe o telefone": "Please enter your phone",
     "Selecione um país": "Select a country",
-    "Selecione um idioma": "Select a language"
+    "Selecione um idioma": "Select a language",
+
+    "Espécies": "Species",
+    "Especie": "Specie",
+    "Cão": "Dog",
+    "Gato": "Cat",
+    "Equino": "Equine",
+    "Equino": "Bovine",
+
+    "Raças": "Races",
+    "Raca": "Race",
+
+    "Sexo": "Sex",
+    "Macho": "Male",
+    "Femea": "Female",
+    "Indeterminado": "Undetermined"
 }

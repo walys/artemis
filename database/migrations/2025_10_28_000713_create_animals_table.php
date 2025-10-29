@@ -28,7 +28,6 @@ return new class extends Migration
 
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('species_id')->references('id')->on('species');
-            $table->foreign('breed_id')->references('id')->on('breeds');
             $table->foreign('animal_sex_id')->references('id')->on('animal_sex');
         });
     }

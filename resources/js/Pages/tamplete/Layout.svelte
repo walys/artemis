@@ -1,6 +1,6 @@
 <script>
     import {_} from "$lib/lang/lang.js";
-    import { onMount } from "svelte";
+    import { onMount, afterUpdate } from "svelte";
     import { getData } from "$lib/api/api.js";
     import Navbar from "./Components/Navbar.svelte";
     import Footer from "./Components/Footer.svelte";
@@ -16,7 +16,7 @@
     let endPointLanguages = apiUrl + "/languages";
     let languageLists = [];
     let lang = 'pt-BR';
-    let loading = false;
+    let loading = true;
      // Adicione estas variáveis
     let loadingProgress = 0;
     let loadingInterval;
@@ -61,12 +61,12 @@
 
     onMount(async () => {
         // Inicia a barra de progresso
-        loadingInterval = setInterval(() => {
-            if (loadingProgress < 90) {
-                // loadingProgress += Math.random() * 15;
-                loadingProgress = Math.floor(loadingProgress + Math.random() * 15);
-            }
-        }, 300);
+        // loadingInterval = setInterval(() => {
+        //     if (loadingProgress < 90) {
+        //         // loadingProgress += Math.random() * 15;
+        //         loadingProgress = Math.floor(loadingProgress + Math.random() * 15);
+        //     }
+        // }, 200);
 
         // Carregar na ordem correta
         await import('../../../../public/sneat/assets/vendor/js/menu.js');
@@ -75,16 +75,16 @@
         await handleAutenticated();
         await handleLanguage();
         
-        setTimeout(() => {
-            loadingProgress = 100;
-            clearInterval(loadingInterval);
+        // setTimeout(() => {
+        //     loadingProgress = 100;
+        //     clearInterval(loadingInterval);
             
-            setTimeout(() => {
-                loading = true;
-                handleAutenticated();
-                handleLanguage();
-            }, 500);
-        }, 5000);
+        //     setTimeout(() => {
+        //         loading = true;
+        //         handleAutenticated();
+        //         handleLanguage();
+        //     }, 500);
+        // }, 5000);
     });
 </script>
 
@@ -859,5 +859,19 @@
         .progress-container {
             width: 250px;
         }
+    }
+
+    /* Garante que os submenus funcionem */
+    .menu-sub {
+        display: none;
+    }
+    
+    .menu-item.active.open .menu-sub {
+        display: block;
+    }
+    
+    /* Remove qualquer estilo que possa estar conflitando */
+    .layout-menu .menu-item.active > .menu-link {
+        background: rgba(255, 255, 255, 0.1);
     }
 </style>
