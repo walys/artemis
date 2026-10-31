@@ -1,11 +1,19 @@
-@import 'tailwindcss';
+/*
+|--------------------------------------------------------------------------
+| Artemis - Estilos globais
+|--------------------------------------------------------------------------
+|
+| Framework principal: Bootstrap 5.3
+| Estilos personalizados do sistema serão adicionados aqui.
+|
+*/
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #f8f9fa;
 }

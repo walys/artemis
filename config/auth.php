@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Users\UserMaster;
 
 return [
 
@@ -42,6 +43,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'master' => [
+            'driver' => 'session',
+            'provider' => 'master_users',
+        ],
     ],
 
     /*
@@ -68,9 +74,14 @@ return [
         ],
 
         // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
         // ],
+
+        'master_users' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MASTER_MODEL', UserMaster::class)  
+        ],
     ],
 
     /*

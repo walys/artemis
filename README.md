@@ -15,3 +15,8 @@ Sistema web para gerenciamento laboratorial veterinário.
 ./vendor/bin/sail up -d
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run dev
+
+## Como derrubar
+
+```bash
+./vendor/bin/sail down
