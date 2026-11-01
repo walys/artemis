@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserMasterSeeder;
+use Database\Seeders\LanguagesSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserMasterSeeder::class,
+            LanguagesSeeder::class,
         ]);
     }
 }

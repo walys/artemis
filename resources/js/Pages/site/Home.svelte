@@ -1,4 +1,5 @@
 <script>
+    import {_} from "$lib/lang/lang.js";
     import '../../css/landing/landing.css';
     import SiteHeader from "$components/landing/SiteHeader.svelte";
     import HeroSection from "$components/landing/HeroSection.svelte";
@@ -15,7 +16,7 @@
     <title>Artemis | Gestão Laboratorial Veterinária</title>
     <meta
         name="description"
-        content="Conheça o Artemis, uma proposta de plataforma para organização e gestão de laboratórios veterinários."
+        content="{_("Conheça o Artemis, uma proposta de plataforma para organização e gestão de laboratórios veterinários.")}"
     />
 </svelte:head>
 

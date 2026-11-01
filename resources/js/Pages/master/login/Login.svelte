@@ -6,7 +6,8 @@
     let email = ''
     let password = ''
     let loading = false;
-    let error = ''
+    let error = '';
+    let urlRedirect = '/master/dashboard'; // URL de redirecionamento após o login bem-sucedido
 
     async function handleLogin() {
         error = '';

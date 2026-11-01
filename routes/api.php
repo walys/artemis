@@ -4,13 +4,21 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Master\Auth\LoginController;
+use App\Http\Controllers\Site\LanguageController;
+
+
+/*
+|--------------------------------------------------------------------------
+| Rotas públicas
+|--------------------------------------------------------------------------
+*/
+Route::get('/site/languages', [LanguageController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
 | Rotas públicas Master
 |--------------------------------------------------------------------------
 */
-
 Route::prefix('master')->group(function () {
 
     Route::post('/login', [LoginController::class, 'store'])

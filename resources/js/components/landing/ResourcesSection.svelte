@@ -1,35 +1,35 @@
 <script>
+    import {_} from "$lib/lang/lang.js";
     const recursos = [
         {
             icone: 'bi-clipboard2-pulse',
-            titulo: 'Gestão de exames',
+            titulo: _("Gestão de exames"),
             descricao:
-                'Uma área para organizar os processos e acompanhar os exames laboratoriais.',
+                _("Uma área para organizar os processos e acompanhar os exames laboratoriais."),
         },
         {
             icone: 'bi-heart-pulse',
-            titulo: 'Gestão de pacientes',
+            titulo: _("Gestão de pacientes"),
             descricao:
-                'Informações dos pacientes veterinários organizadas em um só lugar.',
+                _("Informações dos pacientes veterinários organizadas em um só lugar."),
         },
         {
             icone: 'bi-file-earmark-medical',
-            titulo: 'Resultados centralizados',
+            titulo: _("Resultados centralizados"),
             descricao:
-                'Uma proposta de centralização das informações e dos resultados laboratoriais.',
+                _("Uma proposta de centralização das informações e dos resultados laboratoriais."),
         },
     ];
 </script>
 <section class="content-section resources-section" id="recursos">
     <div class="container">
         <div class="section-heading text-center">
-            <span class="eyebrow">RECURSOS DA PLATAFORMA</span>
+            <span class="eyebrow">{_("RECURSOS DA PLATAFORMA")}</span>
             <h2 class="section-title">
-                Um ambiente pensado para o laboratório.
+                {_("Um ambiente pensado para o laboratório.")}
             </h2>
             <p class="section-description mx-auto">
-                Conheça as áreas previstas para apoiar a organização
-                da operação laboratorial.
+                {_("Conheça as áreas previstas para apoiar a organização da operação laboratorial.")}
             </p>
         </div>
 
@@ -44,7 +44,7 @@
                         <h3>{recurso.titulo}</h3>
                         <p>{recurso.descricao}</p>
                         <span class="planned-label">
-                            Recurso previsto
+                            {_("Recurso previsto")}
                         </span>
                     </article>
                 </div>

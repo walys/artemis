@@ -1,29 +1,29 @@
  <script>
+    import {_} from "$lib/lang/lang.js";
     const planos = [
         {
-            nome: 'Essencial',
-            descricao: 'Para laboratórios que buscam organizar sua rotina.',
+            nome: _("Essencial"),
+            descricao: _("Para laboratórios que buscam organizar sua rotina."),
         },
         {
-            nome: 'Profissional',
-            descricao: 'Para operações que precisam de mais recursos.',
+            nome: _("Profissional"),
+            descricao: _("Para operações que precisam de mais recursos."),
         },
         {
-            nome: 'Personalizado',
-            descricao: 'Para necessidades específicas de cada laboratório.',
+            nome: _("Personalizado"),
+            descricao: _("Para necessidades específicas de cada laboratório."),
         },
     ];
 </script>
 <section class="plans-section" id="planos">
     <div class="container">
         <div class="section-heading text-center">
-            <span class="eyebrow">PLANOS</span>
+            <span class="eyebrow">{_("PLANOS")}</span>
             <h2 class="section-title">
-                Uma solução que pode acompanhar seu laboratório.
+                {_("Uma solução que pode acompanhar seu laboratório.")}
             </h2>
             <p class="section-description mx-auto">
-                Estamos estruturando as modalidades de contratação
-                do Artemis para diferentes necessidades laboratoriais.
+                {_("Estamos estruturando as modalidades de contratação do Artemis para diferentes necessidades laboratoriais.")}
             </p>
         </div>
 
@@ -40,11 +40,11 @@
 
                         <span class="plan-status">
                             <i class="bi bi-info-circle"></i>
-                            Em definição
+                            {_("Em definição")}
                         </span>
 
                         <a href="#contato" class="plan-link">
-                            Tenho interesse
+                            {_("Tenho interesse")}
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </article>
@@ -53,8 +53,7 @@
         </div>
 
         <p class="plans-disclaimer">
-            Valores, limites e recursos de cada plano serão definidos
-            antes do início das contratações.
+            {_("Valores, limites e recursos de cada plano serão definidos antes do início das contratações.")}
         </p>
     </div>
 </section>
