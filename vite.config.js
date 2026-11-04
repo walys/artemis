@@ -6,6 +6,7 @@ export default defineConfig({
     resolve: {
         alias: {
         $components: '/resources/js/components',
+        $css : '/resources/js/css',
         $lib: '/resources/js/lib',
         $site: '/resources/js/Pages/site',
         $admin: '/resources/js/Pages/admin',

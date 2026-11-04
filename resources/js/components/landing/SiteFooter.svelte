@@ -6,7 +6,13 @@
         <div class="footer-main">
             <a class="navbar-brand brand" href="#inicio">
                 <span class="brand-icon">
-                    <i class="bi bi-heart-pulse-fill"></i>
+                    <!-- <i class="bi bi-heart-pulse-fill"></i> -->
+                     <img
+                        src={"/images/visual/logo-03.png"}
+                        style="border-radius: 40%; width: 70%;"
+                        alt="Logo"
+                        class="img-fluid mb-2"
+                    />
                 </span>
                 <span>Artemis</span>
             </a>

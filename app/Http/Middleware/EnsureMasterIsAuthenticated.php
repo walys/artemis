@@ -14,9 +14,7 @@ class EnsureMasterIsAuthenticated
         $guard = Auth::guard('master');
 
         if (!$guard->check()) {
-            return response()->json([
-                'message' => 'Não autenticado.',
-            ], 401);
+            return redirect()->route('master.login');
         }
 
         $user = $guard->user();
@@ -34,4 +32,5 @@ class EnsureMasterIsAuthenticated
 
         return $next($request);
     }
+
 }

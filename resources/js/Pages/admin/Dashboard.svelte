@@ -112,11 +112,10 @@
                 <div>
                     <span class="eyebrow">PAINEL PRINCIPAL</span>
 
-                    <h1>Olá, {usuario.nome}!</h1>
+                    <h1>{_("Olá")}, {usuario.nome}!</h1>
 
                     <p>
-                        Bem-vindo ao Artemis. Acompanhe as informações
-                        do seu laboratório em um só lugar.
+                        {_("Bem-vindo ao Artemis. Acompanhe as informações do seu laboratório em um só lugar.")}
                     </p>
                 </div>
 
@@ -130,7 +129,7 @@
                 <div class="section-heading">
                     <div>
                         <h2>Resumo do laboratório</h2>
-                        <p>Visão geral dos principais indicadores.</p>
+                        <p>{_("Visão geral dos principais indicadores.")}</p>
                     </div>
                 </div>
 
@@ -138,7 +137,7 @@
                     <div class="col-12 col-md-6 col-xl-4">
                         <article class="stat-card">
                             <div class="stat-top">
-                                <span>Pacientes cadastrados</span>
+                                <span>{_("Pacientes cadastrados")}</span>
 
                                 <div class="stat-icon icon-blue">
                                     <i class="bi bi-heart-pulse"></i>
@@ -150,7 +149,7 @@
                             </div>
 
                             <span class="stat-description">
-                                Total de pacientes registrados
+                                {_("Total de pacientes registrados")}
                             </span>
                         </article>
                     </div>
@@ -158,7 +157,7 @@
                     <div class="col-12 col-md-6 col-xl-4">
                         <article class="stat-card">
                             <div class="stat-top">
-                                <span>Exames pendentes</span>
+                                <span>{_("Exames pendentes")}</span>
 
                                 <div class="stat-icon icon-orange">
                                     <i class="bi bi-clock-history"></i>
@@ -170,7 +169,7 @@
                             </div>
 
                             <span class="stat-description">
-                                Aguardando processamento
+                                {_("Aguardando processamento")}
                             </span>
                         </article>
                     </div>
@@ -178,7 +177,7 @@
                     <div class="col-12 col-md-6 col-xl-4">
                         <article class="stat-card">
                             <div class="stat-top">
-                                <span>Exames concluídos</span>
+                                <span>{_("Exames concluídos")}</span>
 
                                 <div class="stat-icon icon-green">
                                     <i class="bi bi-check2-circle"></i>
@@ -190,7 +189,7 @@
                             </div>
 
                             <span class="stat-description">
-                                Exames finalizados
+                                {_("Exames finalizados")}
                             </span>
                         </article>
                     </div>
@@ -201,8 +200,8 @@
             <section class="dashboard-section">
                 <div class="section-heading">
                     <div>
-                        <h2>Acesso rápido</h2>
-                        <p>Atalhos para as principais áreas do sistema.</p>
+                        <h2>{_("Acesso rápido")}</h2>
+                        <p>{_("Atalhos para as principais áreas do sistema.")}</p>
                     </div>
                 </div>
 
@@ -214,16 +213,15 @@
                             </div>
 
                             <div class="shortcut-content">
-                                <h3>Pacientes</h3>
+                                <h3>{_("Pacientes")}</h3>
 
                                 <p>
-                                    Área destinada ao cadastro e à consulta
-                                    de pacientes veterinários.
+                                    {_("Área destinada ao cadastro e à consulta de pacientes veterinários.")}
                                 </p>
 
                                 <span class="module-status">
                                     <i class="bi bi-hourglass-split"></i>
-                                    Módulo não implementado
+                                    {_("Módulo não implementado")}
                                 </span>
                             </div>
                         </article>
@@ -236,16 +234,15 @@
                             </div>
 
                             <div class="shortcut-content">
-                                <h3>Exames laboratoriais</h3>
+                                <h3>{_("Exames laboratoriais")}</h3>
 
                                 <p>
-                                    Área destinada à organização e ao
-                                    acompanhamento dos exames.
+                                    {_("Área destinada à organização e ao acompanhamento dos exames.")}
                                 </p>
 
                                 <span class="module-status">
                                     <i class="bi bi-hourglass-split"></i>
-                                    Módulo não implementado
+                                    {_("Módulo não implementado")}
                                 </span>
                             </div>
                         </article>
@@ -258,16 +255,15 @@
                             </div>
 
                             <div class="shortcut-content">
-                                <h3>Resultados</h3>
+                                <h3>{_("Resultados")}</h3>
 
                                 <p>
-                                    Área destinada à consulta dos resultados
-                                    dos exames laboratoriais.
+                                    {_("Área destinada à consulta dos resultados dos exames laboratoriais.")}
                                 </p>
 
                                 <span class="module-status">
                                     <i class="bi bi-hourglass-split"></i>
-                                    Módulo não implementado
+                                    {_("Módulo não implementado")}
                                 </span>
                             </div>
                         </article>
@@ -280,16 +276,15 @@
                             </div>
 
                             <div class="shortcut-content">
-                                <h3>Relatórios</h3>
+                                <h3>{_("Relatórios")}</h3>
 
                                 <p>
-                                    Área destinada à visualização de
-                                    indicadores e relatórios do laboratório.
+                                    {_("Área destinada à visualização de indicadores e relatórios do laboratório.")}
                                 </p>
 
                                 <span class="module-status">
                                     <i class="bi bi-hourglass-split"></i>
-                                    Módulo não implementado
+                                    {_("Módulo não implementado")}
                                 </span>
                             </div>
                         </article>
@@ -301,8 +296,8 @@
             <section class="dashboard-section">
                 <div class="section-heading">
                     <div>
-                        <h2>Atividades recentes</h2>
-                        <p>Espaço reservado para acompanhar as movimentações.</p>
+                        <h2>{_("Atividades recentes")}</h2>
+                        <p>{_("Espaço reservado para acompanhar as movimentações.")}</p>
                     </div>
                 </div>
 
@@ -311,11 +306,10 @@
                         <i class="bi bi-inbox"></i>
                     </div>
 
-                    <h3>Nenhuma atividade disponível</h3>
+                    <h3>{_("Nenhuma atividade disponível")}</h3>
 
                     <p>
-                        Quando os módulos estiverem implementados,
-                        as atividades recentes poderão aparecer aqui.
+                        {_("Quando os módulos estiverem implementados, as atividades recentes poderão aparecer aqui.")}
                     </p>
                 </div>
             </section>
@@ -324,7 +318,7 @@
                 <span>Artemis</span>
 
                 <span>
-                    Precisão de laboratório, cuidado veterinário.
+                    {_("Precisão de laboratório, cuidado veterinário.")}
                 </span>
             </footer>
         </main>

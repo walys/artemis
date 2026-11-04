@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -35,9 +36,32 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        if($this->AuthMaster($request)['master'] && $this->AuthMaster($request)['master']->is_active) {
+            return array_merge(parent::share($request), [
+                'auth' => $this->AuthMaster($request),
+            ]);
+        } else {
+            return array_merge(parent::share($request), [
+                'auth' => $this->AuthUser($request),
+            ]);
+        }
+    }
+
+    public function AuthMaster(Request $request): array
+    {
+        $guard = Auth::guard('master');
+        $user = $guard->user();
+        $userSettings = $user ? $user->settings : null;
         return [
-            ...parent::share($request),
-            //
+            'master' => $user,
+            'userSettings' => $userSettings,
+        ];
+    }
+
+    public function AuthUser(Request $request): array
+    {
+        return [
+            'user' => $request->user(),
         ];
     }
 }

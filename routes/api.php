@@ -6,12 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Master\Auth\LoginController;
 use App\Http\Controllers\Site\LanguageController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Rotas públicas
-|--------------------------------------------------------------------------
-*/
+# Rotas públicas do site
 Route::get('/site/languages', [LanguageController::class, 'index']);
 
 /*

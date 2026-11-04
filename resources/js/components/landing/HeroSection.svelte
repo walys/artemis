@@ -40,7 +40,13 @@
                     <div class="visual-orbit orbit-two"></div>
 
                     <div class="visual-icon">
-                        <i class="bi bi-heart-pulse-fill"></i>
+                        <img
+                            src={"/images/visual/logo-03.png"}
+                            style="border-radius: 40%; width: 70%;"
+                            alt="Logo"
+                            class="img-fluid mb-2"
+                        />
+                        <!-- <i class="bi bi-heart-pulse-fill"></i> -->
                     </div>
 
                     <div class="visual-label label-top">
