@@ -9,6 +9,6 @@ class LanguageController extends Controller
 {
     public function index()
     {
-        return inertia('master/languages/Language');
+        return inertia('master/languages/Index');
     }
 }

@@ -34,6 +34,12 @@
             url: '/master/languages',
         },
         {
+            title: _('Planos'),
+            icone: 'bi-briefcase',
+            active: true,
+            url: '/master/plans',
+        },
+        {
             title: _('Pacientes'),
             icone: 'bi-heart-pulse',
             active: false,

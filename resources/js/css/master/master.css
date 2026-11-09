@@ -1101,21 +1101,27 @@
 }
 
 /* button de ação */
-
-.btn:hover {
-    color: #fff;
-    background-color: #2E6B8A;
-    border-color: #1F70B2;
+.btn-primary {
+    background-color: #1F70B2 !important;
+    border-color: #2E6B8A !important;
 }
 
-.btn-primary {
-    background-color: #1F70B2;
-    border-color: #2E6B8A;
+.btn-primary:hover {
+    background-color: #195D95 !important;
+    border-color: #195D95 !important;
+}
+
+.translation-json {
+    font-family: monospace !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    resize: vertical !important;
+    background-color: #f8f9fa !important;
 }
 
 .btn-info {
-    background-color: #2E6B8A;
-    border-color: #1F70B2;
+    background-color: #2E6B8A !important;
+    border-color: #1F70B2 !important;
 }
 
 /* RESPONSIVIDADE */

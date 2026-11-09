@@ -16,6 +16,7 @@
     "dependencies": {
         "@boxicons/svelte": "^1.0.1",
         "@inertiajs/svelte": "^3.9.1",
+        "@tanstack/svelte-table": "^9.3.1",
         "bootstrap": "5.3",
         "bootstrap-icons": "^1.13.2",
         "sweetalert2": "^11.26.25",

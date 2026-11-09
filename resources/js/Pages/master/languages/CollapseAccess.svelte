@@ -75,22 +75,3 @@
     ></textarea>
 
 </div>
-<style>
-    .btn-primary {
-        background-color: #1F70B2;
-        border-color: #2E6B8A;
-    }
-
-    .btn-primary:hover {
-        background-color: #195D95;
-        border-color: #195D95;
-    }
-
-    .translation-json {
-        font-family: monospace;
-        font-size: 13px;
-        line-height: 1.6;
-        resize: vertical;
-        background-color: #f8f9fa;
-    }
-</style>

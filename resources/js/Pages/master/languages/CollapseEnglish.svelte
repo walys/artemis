@@ -1,8 +1,5 @@
 <script>
     import {_} from "$lib/lang/lang.js";
-    import { route } from 'ziggy-js';
-    import { crud } from "$lib/crud/crud.js";
-    import sweetalert from "$lib/sweet/sweetalert.js";
     import saveTranslations from "$lib/helpers/translations.js";
 
     let jsonDataEnUs = $state('');

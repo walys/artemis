@@ -33,12 +33,12 @@
 
     <!-- Indicadores -->
     <section class="dashboard-section">
-        <div class="section-heading">
+        <!-- <div class="section-heading">
             <div>
                 <h2>{_("Resumo do laboratório")}</h2>
                 <p>{_("Visão geral dos principais indicadores.")}</p>
             </div>
-        </div>
+        </div> -->
 
         <div class="row g-3">
 
@@ -108,10 +108,10 @@
     <!-- Acesso rápido -->
     <section class="dashboard-section">
         <div class="section-heading">
-            <div>
+            <!-- <div>
                 <h2>{_("Acesso rápido")}</h2>
                 <p>{_("(Atalhos para as principais áreas do sistema).")}</p>
-            </div>
+            </div> -->
         </div>
 
         <div class="row g-3">
@@ -205,12 +205,12 @@
 
     <!-- Atividades -->
     <section class="dashboard-section">
-        <div class="section-heading">
+        <!-- <div class="section-heading">
             <div>
                 <h2>{_("Atividades recentes")}</h2>
                 <p>{_("Espaço reservado para acompanhar as movimentações.")}</p>
             </div>
-        </div>
+        </div> -->
 
         <div class="empty-state">
             <div class="empty-icon">

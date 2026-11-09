@@ -11,6 +11,7 @@ use App\Http\Controllers\Site\ExempleController;
 use App\Http\Controllers\Master\Auth\LoginController;
 use App\Http\Controllers\Master\Dashboard\DashboardController;
 use App\Http\Controllers\Master\Settings\LanguageController;
+use App\Http\Controllers\Master\Plans\PlanController;
 
 #Admin 
 
@@ -46,5 +47,8 @@ Route::prefix('master')->name('master.')->group(function () {
         
         # Rotas de Idiomas
         Route::get('/languages', [LanguageController::class, 'index'])->name('languages');
+
+        # Rotas de Planos
+        Route::get('/plans', [PlanController::class, 'index'])->name('plans');
     });
 });
