@@ -4,8 +4,9 @@
     "Login realizado com sucesso.": "Login realizado com sucesso.",
     "Não autenticado.": "Não autenticado.",
     "Sessão encerrada com sucesso.": "Sessão encerrada com sucesso.",
+    "Idioma não suportado.": "Idioma não suportado.",
     "Não foi possível gerar o JSON das traduções.": "Não foi possível gerar o JSON das traduções.",
-    "Traduções em português atualizadas com sucesso!": "Traduções em português atualizadas com sucesso!",
+    "Traduções atualizadas com sucesso!": "Traduções atualizadas com sucesso!",
     "Olá": "Olá",
     "Bem-vindo ao Artemis. Acompanhe as informações do seu laboratório em um só lugar.": "Bem-vindo ao Artemis. Acompanhe as informações do seu laboratório em um só lugar.",
     "Visão geral dos principais indicadores.": "Visão geral dos principais indicadores.",
@@ -43,11 +44,6 @@
     "Clique em Exibir para carregar as traduções.": "Clique em Exibir para carregar as traduções.",
     "Inglês": "Inglês",
     "Gerenciamento das traduções em inglês.": "Gerenciamento das traduções em inglês.",
-    "Erro": "Erro",
-    "O JSON informado é inválido.": "O JSON informado é inválido.",
-    "Sucesso": "Sucesso",
-    "Traduções atualizadas com sucesso!": "Traduções atualizadas com sucesso!",
-    "Ocorreu um erro ao atualizar as traduções.": "Ocorreu um erro ao atualizar as traduções.",
     "Português": "Português",
     "Gerenciamento das traduções em português.": "Gerenciamento das traduções em português.",
     "Cole o JSON das traduções em português aqui.": "Cole o JSON das traduções em português aqui.",
@@ -147,5 +143,9 @@
     "Voltar ao início ↑": "Voltar ao início ↑",
     "Artemis - Início": "Artemis - Início",
     "Abrir menu": "Abrir menu",
-    "Entrar": "Entrar"
+    "Entrar": "Entrar",
+    "Erro": "Erro",
+    "O JSON informado é inválido.": "O JSON informado é inválido.",
+    "Sucesso": "Sucesso",
+    "Ocorreu um erro ao atualizar as traduções.": "Ocorreu um erro ao atualizar as traduções."
 }

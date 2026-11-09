@@ -127,7 +127,6 @@ export const crud = {
             isLoading.set(false);
         }
     },
-
     async delete(endpoint){
         try {
             const csrfResponse = await fetch('/csrf-token');

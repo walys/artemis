@@ -4,64 +4,11 @@
     import { route } from 'ziggy-js';
     import { crud } from "$lib/crud/crud.js";
     import sweetalert from "$lib/sweet/sweetalert.js";
+    import saveTranslations from "$lib/helpers/translations.js";
 
-    let jsonData = $state('');
+    let jsonDataPtBr = $state('');
+    let lang = 'pt-BR';
 
-    async function saveTranslations() {
-        let translations;
-
-        // Valida o JSON antes de enviar
-        try {
-            translations = JSON.parse(jsonData);
-        } catch (error) {
-            console.error('Erro ao analisar o JSON:', error);
-
-            sweetalert(
-                _("Erro"),
-                _("O JSON informado é inválido."),
-                "error"
-            );
-
-            return;
-        }
-
-        // Envia as traduções para a API
-        try {
-            const response = await crud.post(
-                route('master.settings.languages.post'),
-                {
-                    translations: translations
-                }
-            );
-
-            if (response.success) {
-                sweetalert(
-                    _("Sucesso"),
-                    _("Traduções atualizadas com sucesso!"),
-                    "success"
-                );
-                jsonData = '';
-            } else {
-                sweetalert(
-                    _("Erro"),
-                    response.message || _("Ocorreu um erro ao atualizar as traduções."),
-                    "error"
-                );
-            }
-
-        } catch (error) {
-            console.error('Erro ao salvar traduções:', error);
-
-            sweetalert(
-                _("Erro"),
-                _("Ocorreu um erro ao atualizar as traduções."),
-                "error"
-            );
-        } finally {
-            // Qualquer ação final, se necessário   
-
-        }
-    }
 </script>
 
 <div class="card p-3">
@@ -86,7 +33,7 @@
         class="form-control translation-json"
         id="formControlTextareaPortuguese"
         rows="15"
-        bind:value={jsonData}
+        bind:value={jsonDataPtBr}
         placeholder={_("Cole o JSON das traduções em português aqui.")}
     ></textarea>
 
@@ -97,7 +44,7 @@
         <button
             type="button"
             class="btn btn-primary"
-            onclick={saveTranslations}
+            onclick={() => saveTranslations(jsonDataPtBr, lang)}
         >
             <i class="bi bi-save me-1"></i>
             {_("Salvar")}

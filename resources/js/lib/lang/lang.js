@@ -1,6 +1,6 @@
-import langBr from "$lib/lang/pt-BR.json";
-import langEn from "$lib/lang/en-Us.json";
-import langEs from "$lib/lang/es-Es.json";
+import langBr from "$lang/pt-BR.json";
+import langEn from "$lang/en-US.json";
+import langEs from "$lang/es-ES.json";
 
 export function _(write) {
     let lang = localStorage.getItem("lang");

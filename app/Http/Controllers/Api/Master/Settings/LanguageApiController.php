@@ -18,6 +18,7 @@ class LanguageApiController extends Controller
             app_path('Http/Controllers'),
             resource_path('js/Pages'),
             resource_path('js/components'),
+            resource_path('js/lib'),
         ];
 
         $translations = [];
@@ -70,14 +71,29 @@ class LanguageApiController extends Controller
         ]);
 
         $translations = $validated['translations'];
-
+        $lang  =$request->input('lang');
         $directory = lang_path();
 
         if (!is_dir($directory)) {
             mkdir($directory, 0755, true);
         }
 
-        $filePath = $directory . '/pt-BR.json';
+        switch($lang) {
+            case 'pt-BR':
+                $filePath = $directory . '/pt-BR.json';
+                break;
+            case 'en-US':
+                $filePath = $directory . '/en-US.json';
+                break;
+            case 'es-ES':
+                $filePath = $directory . '/es-ES.json';
+                break;
+            default:
+                return response()->json([
+                    'success' => false,
+                    'message' => _('Idioma não suportado.'),
+                ], 400);
+        }
 
         $json = json_encode(
             $translations,
@@ -97,7 +113,7 @@ class LanguageApiController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => _('Traduções em português atualizadas com sucesso!'),
+            'message' => _('Traduções atualizadas com sucesso!'),
         ]);
     }
 }

@@ -11,6 +11,7 @@ export default defineConfig({
         $site: '/resources/js/Pages/site',
         $admin: '/resources/js/Pages/admin',
         $master: '/resources/js/Pages/master',
+        $lang: '/lang',
         },
     },
     plugins: [
