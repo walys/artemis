@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if (!$guard->attempt($credentials, false)) {
             throw ValidationException::withMessages([
-                'email' => ['As credenciais informadas são inválidas.'],
+                'email' => [_('As credenciais informadas são inválidas.')],
             ]);
         }
 
@@ -34,7 +34,7 @@ class LoginController extends Controller
             $guard->logout();
 
             throw ValidationException::withMessages([
-                'email' => ['Esta conta Master está desativada.'],
+                'email' => [_('Esta conta Master está desativada.')],
             ]);
         }
 
@@ -45,7 +45,7 @@ class LoginController extends Controller
         ])->save();
 
         return response()->json([
-            'message' => 'Login realizado com sucesso.',
+            'message' => _('Login realizado com sucesso.'),
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -65,7 +65,7 @@ class LoginController extends Controller
             Auth::guard('master')->logout();
 
             return response()->json([
-                'message' => 'Não autenticado.',
+                'message' => _('Não autenticado.'),
             ], 401);
         }
 
@@ -90,7 +90,7 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return response()->json([
-            'message' => 'Sessão encerrada com sucesso.',
+            'message' => _('Sessão encerrada com sucesso.'),
         ]);
     }
 }

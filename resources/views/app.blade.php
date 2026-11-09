@@ -5,6 +5,7 @@
     <link rel="icon" href="../images/visual/logo-03.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    @routes
     @vite(['resources/js/app.js'])
     @inertiaHead
 </head>

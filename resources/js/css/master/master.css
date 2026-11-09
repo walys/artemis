@@ -1100,6 +1100,24 @@
     color: #2e6b8a;
 }
 
+/* button de ação */
+
+.btn:hover {
+    color: #fff;
+    background-color: #2E6B8A;
+    border-color: #1F70B2;
+}
+
+.btn-primary {
+    background-color: #1F70B2;
+    border-color: #2E6B8A;
+}
+
+.btn-info {
+    background-color: #2E6B8A;
+    border-color: #1F70B2;
+}
+
 /* RESPONSIVIDADE */
 @media (max-width: 575.98px) {
     .topbar-actions {

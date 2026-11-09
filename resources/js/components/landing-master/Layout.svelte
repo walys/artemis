@@ -1,13 +1,15 @@
 <script>
     import {_} from "$lib/lang/lang.js";
-    import { page } from '@inertiajs/svelte';
+    import { page, Link } from '@inertiajs/svelte';
     import "$css/master/master.css";
     import SelectorLanguage from "$components/landing-master/Seletor-Language.svelte";
     import DropdownUser from "$components/landing-master/Dropdown-User.svelte";
+    import Breadcrumb from "$components/landing-master/Breadcrumb.svelte";
     import Footer from "$components/landing-master/Footer.svelte";
 
     let user = page.props?.auth?.master;
     let userSettings = page.props?.auth?.userSettings;
+    let { breadcrumb } = $props();
 
     // Estado do menu lateral
     let sidebarCollapsed = $state(false);
@@ -18,32 +20,42 @@
     }
 
     
-
     const menu = [
         {
-            titulo: 'Visão geral',
+            title: _('Visão geral'),
             icone: 'bi-grid-1x2',
-            ativo: true,
+            active: true,
+            url: '/master/dashboard',
         },
         {
-            titulo: 'Pacientes',
+            title: _('Idiomas'),
+            icone: 'bi-translate',
+            active: true,
+            url: '/master/languages',
+        },
+        {
+            title: _('Pacientes'),
             icone: 'bi-heart-pulse',
-            ativo: false,
+            active: false,
+            url: '/master/pacientes',
         },
         {
-            titulo: 'Exames',
+            title: _('Exames'),
             icone: 'bi-clipboard2-pulse',
-            ativo: false,
+            active: false,
+            url: '/master/exames',
         },
         {
-            titulo: 'Resultados',
+            title: _('Resultados'),
             icone: 'bi-file-earmark-medical',
-            ativo: false,
+            active: false,
+            url: '/master/resultados',
         },
         {
-            titulo: 'Relatórios',
+            title: _('Relatórios'),
             icone: 'bi-bar-chart',
-            ativo: false,
+            active: false,
+            url: '/master/relatorios',
         },
     ];
 
@@ -92,26 +104,42 @@
         <!-- Navegação -->
         <nav class="sidebar-nav" aria-label="Menu principal">
             {#each menu as item}
-                <a
-                    href="/"
-                    class:active={item.ativo}
+                <Link
+                    href={item.url}
+                    class="sidebar-link {item.title === breadcrumb ? 'active' : ''}"
+                    title={sidebarCollapsed ? item.title : undefined}
+                    onclick={item.active ? undefined : (event) => event.preventDefault()}
+                >
+                    <i class={`bi ${item.icone}`}></i>
+
+                    {#if !sidebarCollapsed}
+                        <span class="sidebar-link-title">{item.title}</span>
+
+                        {#if !item.active}
+                            <span class="coming-soon">Em breve</span>
+                        {/if}
+                    {/if}
+                </Link>
+                <!-- <a
+                    href={item.url}
+                    class:active={item.title == breadcrumb ? true : false}
                     class="sidebar-link"
-                    aria-current={item.ativo ? 'page' : undefined}
-                    title={sidebarCollapsed ? item.titulo : undefined}
-                    onclick={item.ativo ? undefined : (event) => event.preventDefault()}
+                    aria-current={item.active ? 'page' : undefined}
+                    title={sidebarCollapsed ? item.title : undefined}
+                    onclick={item.active ? undefined : (event) => event.preventDefault()}
                 >
                     <i class={`bi ${item.icone}`}></i>
 
                     {#if !sidebarCollapsed}
                         <span class="sidebar-link-title">
-                            {item.titulo}
+                            {item.title}
                         </span>
 
-                        {#if !item.ativo}
+                        {#if !item.active}
                             <span class="coming-soon">Em breve</span>
                         {/if}
                     {/if}
-                </a>
+                </a> -->
             {/each}
         </nav>
 
@@ -149,11 +177,7 @@
                     <i class={`bi ${sidebarCollapsed ? 'bi-layout-sidebar' : 'bi-layout-sidebar-inset'}`}></i>
                 </button>
 
-                <div class="breadcrumb">
-                    <span>Artemis</span>
-                    <i class="bi bi-chevron-right"></i>
-                    <strong>{_("Visão geral")}</strong>
-                </div>
+                <Breadcrumb breadcrumb={breadcrumb} />
             </div>
 
             <div class="topbar-actions">

@@ -3,6 +3,7 @@
     import { page } from '@inertiajs/svelte';
     import Layout from "$components/landing-master/Layout.svelte";
 
+    let breadcrumb = _("Visão geral");
     let usuario = page.props?.auth?.master;
     let resumo = {
         pacientes: 120,
@@ -12,7 +13,7 @@
 
 </script>
 
-<Layout>
+<Layout breadcrumb={breadcrumb}>
     <!-- Boas-vindas -->
     <section class="welcome-section">
         <div>

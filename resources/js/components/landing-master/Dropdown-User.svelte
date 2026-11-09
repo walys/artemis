@@ -77,17 +77,17 @@
 
             <button type="button" class="user-menu-item">
                 <i class="bi bi-person-circle"></i>
-                <span>{_('Meu perfil')}</span>
+                <span>{_("Meu perfil")}</span>
             </button>
 
             <button type="button" class="user-menu-item">
                 <i class="bi bi-gear"></i>
-                <span>{_('Configurações')}</span>
+                <span>{_("Configurações")}</span>
             </button>
 
             <button type="button" class="user-menu-item">
                 <i class="bi bi-shield-lock"></i>
-                <span>{_('Segurança')}</span>
+                <span>{_("Segurança")}</span>
             </button>
 
             <div class="user-menu-divider"></div>
@@ -101,7 +101,7 @@
                 <i class="bi bi-box-arrow-right"></i>
 
                 <span>
-                    {loggingOut ? _('Saindo...') : _('Sair')}
+                    {loggingOut ? _("Saindo...") : _("Sair")}
                 </span>
             </button>
         </div>

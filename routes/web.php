@@ -10,6 +10,7 @@ use App\Http\Controllers\Site\ExempleController;
 # Master
 use App\Http\Controllers\Master\Auth\LoginController;
 use App\Http\Controllers\Master\Dashboard\DashboardController;
+use App\Http\Controllers\Master\Settings\LanguageController;
 
 #Admin 
 
@@ -40,8 +41,10 @@ Route::prefix('master')->name('master.')->group(function () {
 
     // Área protegida
     Route::middleware('master.auth')->group(function () {
-
+        # Rotas do Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+        
+        # Rotas de Idiomas
+        Route::get('/languages', [LanguageController::class, 'index'])->name('languages');
     });
 });
