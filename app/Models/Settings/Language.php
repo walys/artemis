@@ -2,7 +2,9 @@
 
 namespace App\Models\Settings;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Plans\PlanDescription;
 
 class Language extends Model
 {
@@ -12,4 +14,9 @@ class Language extends Model
         'name',
         'code',
     ];
+
+    public function planDescriptions(): HasMany
+    {
+        return $this->hasMany(PlanDescription::class);
+    }
 }

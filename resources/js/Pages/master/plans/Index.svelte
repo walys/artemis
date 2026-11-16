@@ -3,6 +3,7 @@
     import { _ } from "$lib/lang/lang.js";
     import Layout from "$components/landing-master/Layout.svelte";
     import GridTable from "$components/table/GridTable.svelte";
+    import Form from "$master/plans/Form.svelte";
 
     let breadcrumb = _("Planos");
 
@@ -123,6 +124,44 @@
         },
     ]);
 
+     // Controle da modal
+    let showModal = $state(false);
+    let modalInstance = null;
+
+     // Dados do formulário
+    let formData = $state({
+        name: '',
+        description: '',
+        price: '',
+        status: 'Ativo'
+    });
+
+    function openModal() {
+        formData = { name: '', description: '', price: '', status: 'Ativo' };
+        showModal = true;
+    }
+
+    function closeModal() {
+        showModal = false;
+    }
+
+    function handleSubmit(payload) {
+        // Aqui você adiciona o novo plano
+        const newId = Math.max(0, ...data.map(d => d.id)) + 1;
+        data = [
+            ...data,
+            {
+                id: newId,
+                name: payload.name,
+                description: payload.description,
+                price: payload.price,
+                status: payload.status
+            }
+        ];
+
+        closeModal();
+    }
+
 </script>
 
 <Layout breadcrumb={breadcrumb}>
@@ -138,7 +177,7 @@
                     {_('Gerenciamento de planos')}
                 </h5>
 
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick={openModal}>
                     <i class="bi bi-plus-lg me-1"></i>
                     {_('Novo plano')}
                 </button>
@@ -170,42 +209,51 @@
         </div>
     </section>
 </Layout>
+<!-- MODAL -->
+{#if showModal}
+    <div
+        class="modal fade show d-block"
+        tabindex="-1"
+        style="background: rgba(0,0,0,0.5);"
+        role="dialog"
+    >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {_('Novo plano')}
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        aria-label="Close"
+                        onclick={closeModal}
+                    ></button>
+                </div>
 
-<style>
-    .card {
-        border: 1px solid #e0e9f0;
-        border-radius: 14px;
-        background: #fff;
-        transition: border-color 0.2s;
-    }
-    .search-box {
-        position: relative;
-        width: 25%;
-    }
+                <div class="modal-body">
+                    <Form {formData} onSubmit={handleSubmit} onCancel={closeModal} />
+                </div>
 
-    .search-box i {
-        position: absolute;
-        top: 50%;
-        left: 12px;
-        transform: translateY(-50%);
-        color: #6BA3C8;
-        z-index: 1;
-    }
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick={closeModal}
+                    >
+                        {_('Cancelar')}
+                    </button>
 
-    .search-box input {
-        padding-left: 36px;
-        border: 1px solid #B8D4E8;
-        border-radius: 8px;
-    }
-
-    .search-box input:focus {
-        border-color: #2E6B8A;
-        box-shadow: 0 0 0 0.2rem rgba(46, 107, 138, 0.12);
-    }
-
-    @media (max-width: 576px) {
-        .search-box {
-            width: 100%;
-        }
-    }
-</style>
+                    <!-- Botão vinculado ao form pelo atributo form="id" -->
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        form="plano-form"
+                    >
+                        {_('Salvar')}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{/if}

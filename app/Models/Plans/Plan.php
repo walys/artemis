@@ -13,7 +13,6 @@ class Plan extends Model
     protected $fillable = [
         'name',
         'code',
-        'description',
         'is_active',
         'sort_order',
     ];
@@ -44,5 +43,10 @@ class Plan extends Model
     public function subscriptions(): HasMany
     {
         return $this->hasMany(CompanySubscription::class);
+    }
+
+    public function descriptions(): HasMany
+    {
+        return $this->hasMany(PlanDescription::class);
     }
 }

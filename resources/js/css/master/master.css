@@ -1143,3 +1143,40 @@
         margin-left: 0;
     }
 }
+
+.card {
+    border: 1px solid #e0e9f0;
+    border-radius: 14px;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+.search-box {
+    position: relative;
+    width: 25%;
+}
+
+.search-box i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #6BA3C8;
+    z-index: 1;
+}
+
+.search-box input {
+    padding-left: 36px;
+    border: 1px solid #B8D4E8;
+    border-radius: 8px;
+}
+
+.search-box input:focus {
+    border-color: #2E6B8A;
+    box-shadow: 0 0 0 0.2rem rgba(46, 107, 138, 0.12);
+}
+
+@media (max-width: 576px) {
+    .search-box {
+        width: 100%;
+    }
+}
