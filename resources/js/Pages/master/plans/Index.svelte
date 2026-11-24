@@ -126,7 +126,7 @@
             </div>
 
             <Filter bind:filters />
-
+            <br />
             <GridTable
                 bind:this={gridRef}  
                 columns={columns}

@@ -23,28 +23,24 @@
 />
 
 <style>
-    :global(.svelte-select .selection) {
-        min-height: 50px;
-    }
-
-    :global(.svelte-select .value-container) {
-        min-height: 40px;
-    }
-
     :global(.svelte-select) {
         position: relative;
         z-index: 1000;
-    }
-
-    :global(.svelte-select .list) {
-        z-index: 9999 !important;
+        color: #1F3442;
+        font-size: 13px;
     }
 
     :global(.svelte-select .selection) {
         min-height: 50px;
+        border-color: #B8D4E8;
+        border-radius: 8px;
     }
 
     :global(.svelte-select .value-container) {
         min-height: 30px;
+    }
+
+    :global(.svelte-select .list) {
+        z-index: 9999 !important;
     }
 </style>

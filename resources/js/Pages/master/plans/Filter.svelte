@@ -73,15 +73,22 @@
     </div>
 
 </div>
-
 <style>
     .filter-item {
+        flex: 1 1 180px;
         min-width: 180px;
-        flex: 1;
+        max-width: 100%;
     }
 
     .filter-item .form-label {
         font-weight: 500;
         margin-bottom: 0.4rem;
+    }
+
+    @media (max-width: 576px) {
+        .filter-item {
+            flex: 1 1 100%;
+            min-width: 100%;
+        }
     }
 </style>

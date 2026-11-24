@@ -1357,3 +1357,188 @@
         width: 100%;
     }
 }
+
+
+/* ==============================================
+   FORMULÁRIOS — PADRÃO ARTEMIS
+============================================== */
+
+/* Labels */
+:global(.form-label) {
+    display: block;
+    margin-bottom: 7px;
+    color: #1F3442;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Inputs e selects nativos */
+:global(.form-control:not(.svelte-select)),
+:global(.form-select) {
+    display: block;
+    width: 100%;
+    min-height: 42px;
+    padding: 9px 12px;
+
+    border: 1px solid #B8D4E8;
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+    color: #1F3442;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Textareas */
+:global(textarea.form-control) {
+    min-height: 110px;
+    padding: 11px 12px;
+    resize: vertical;
+}
+
+/* Foco */
+:global(.form-control:focus),
+:global(.form-select:focus) {
+    border-color: #2E6B8A;
+    outline: 0;
+    background-color: #FFFFFF;
+    color: #1F3442;
+    box-shadow: 0 0 0 3px rgba(46, 107, 138, 0.12);
+}
+
+/* Placeholder */
+:global(.form-control::placeholder) {
+    color: #9AAAB6;
+    opacity: 1;
+}
+
+/* Campos desabilitados */
+:global(.form-control:disabled),
+:global(.form-select:disabled) {
+    background-color: #F2F6FA;
+    color: #8293A0;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+/* Validação */
+:global(.form-control.is-invalid),
+:global(.form-select.is-invalid) {
+    border-color: #B85454;
+    background-image: none;
+}
+
+:global(.form-control.is-invalid:focus),
+:global(.form-select.is-invalid:focus) {
+    border-color: #B85454;
+    box-shadow: 0 0 0 3px rgba(184, 84, 84, 0.12);
+}
+
+:global(.form-control.is-valid),
+:global(.form-select.is-valid) {
+    border-color: #4A9678;
+    background-image: none;
+}
+
+:global(.invalid-feedback) {
+    display: block;
+    margin-top: 5px;
+    color: #B85454;
+    font-size: 11px;
+}
+
+:global(.valid-feedback) {
+    margin-top: 5px;
+    color: #4A9678;
+    font-size: 11px;
+}
+
+/* Checkbox e radio */
+:global(.form-check-input) {
+    width: 17px;
+    height: 17px;
+    margin-top: 0.2em;
+    border: 1px solid #B8D4E8;
+    cursor: pointer;
+}
+
+:global(.form-check-input:checked) {
+    background-color: #2E6B8A;
+    border-color: #2E6B8A;
+}
+
+:global(.form-check-input:focus) {
+    border-color: #2E6B8A;
+    box-shadow: 0 0 0 3px rgba(46, 107, 138, 0.12);
+}
+
+:global(.form-check-label) {
+    color: #536879;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Texto auxiliar */
+:global(.form-text) {
+    display: block;
+    margin-top: 5px;
+    color: #8193A1;
+    font-size: 11px;
+}
+
+/* Agrupamento de campos */
+:global(.input-group .form-control),
+:global(.input-group .form-select) {
+    min-height: 42px;
+}
+
+:global(.input-group-text) {
+    border-color: #B8D4E8;
+    background-color: #E8F0F8;
+    color: #536879;
+    font-size: 13px;
+}
+
+/* Espaçamento dos formulários */
+:global(.form-group) {
+    margin-bottom: 18px;
+}
+
+/* Select personalizado svelte-select */
+:global(.svelte-select) {
+    color: #1F3442;
+    font-size: 13px;
+}
+
+:global(.svelte-select .selection) {
+    min-height: 42px;
+    border-color: #B8D4E8;
+    border-radius: 8px;
+}
+
+:global(.svelte-select.focused .selection) {
+    border-color: #2E6B8A;
+    box-shadow: 0 0 0 3px rgba(46, 107, 138, 0.12);
+}
+
+/* ==============================================
+   PAGINAÇÃO SVAR
+============================================== */
+
+:global(.wx-pager input) {
+    display: inline-block !important;
+    width: 65px !important;
+    min-width: 65px !important;
+    max-width: 65px !important;
+
+    height: 32px !important;
+    min-height: 32px !important;
+
+    padding: 4px 8px !important;
+    box-sizing: border-box !important;
+}

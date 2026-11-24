@@ -1,25 +1,50 @@
+
 <script>
     import {_} from "$lib/lang/lang.js";
-    import { page, Link } from '@inertiajs/svelte';
+    import { Link } from '@inertiajs/svelte';
     import "$css/master/master.css";
     import SelectorLanguage from "$components/landing-master/Seletor-Language.svelte";
     import DropdownUser from "$components/landing-master/Dropdown-User.svelte";
     import Breadcrumb from "$components/landing-master/Breadcrumb.svelte";
     import Footer from "$components/landing-master/Footer.svelte";
 
-    let user = page.props?.auth?.master;
-    let userSettings = page.props?.auth?.userSettings;
+    let user = $state(null);
+    let userSettings = $state(null);
     let { breadcrumb } = $props();
+
+    // Inicializa os dados do usuário
+    // Mantém a leitura original do contexto Inertia
+    import { page } from '@inertiajs/svelte';
+
+    user = page.props?.auth?.master;
+    userSettings = page.props?.auth?.userSettings;
 
     // Estado do menu lateral
     let sidebarCollapsed = $state(false);
 
-    // Função para alternar o estado do menu lateral
+    // Estado dos submenus expandidos
+    let expandedMenus = $state([]);
+
+    // Alterna o menu lateral
     function toggleSidebar() {
         sidebarCollapsed = !sidebarCollapsed;
     }
 
-    
+    // Alterna a abertura do submenu
+    function toggleSubMenu(title) {
+        if (expandedMenus.includes(title)) {
+            expandedMenus = expandedMenus.filter(item => item !== title);
+        } else {
+            expandedMenus = [...expandedMenus, title];
+        }
+    }
+
+    // Verifica se algum submenu está ativo
+    function hasActiveSubMenu(item) {
+        return item.subMenu?.some(sub => sub.title === breadcrumb) ?? false;
+    }
+
+    // Estrutura do menu
     const menu = [
         {
             title: _('Visão geral'),
@@ -34,10 +59,23 @@
             url: '/master/languages',
         },
         {
-            title: _('Planos'),
+            title: _('Gerenciar Planos'),
             icone: 'bi-briefcase',
             active: true,
-            url: '/master/plans',
+            subMenu: [
+                {
+                    title: _('Planos'),
+                    icone: 'bi-card-list',
+                    active: true,
+                    url: '/master/plans',
+                },
+                {
+                    title: _('Planos descrição'),
+                    icone: 'bi-card-text',
+                    active: false,
+                    url: '/master/plans-description',
+                },
+            ],
         },
         {
             title: _('Pacientes'),
@@ -65,6 +103,14 @@
         },
     ];
 
+    // Abre automaticamente o submenu da página atual
+    $effect(() => {
+        const activeMenu = menu.find(item => hasActiveSubMenu(item));
+
+        if (activeMenu && !expandedMenus.includes(activeMenu.title)) {
+            expandedMenus = [...expandedMenus, activeMenu.title];
+        }
+    });
 </script>
 
 <svelte:head>
@@ -86,7 +132,6 @@
         <div class="sidebar-header">
             <a href="/" class="brand" aria-label="Artemis - {_("Início")}">
                 <span class="brand-icon">
-                    <!-- <i class="bi bi-heart-pulse-fill"></i> -->
                     <img
                         src={"/images/visual/logo-03.png"}
                         style="border-radius: 40%; width: 70%;"
@@ -109,44 +154,102 @@
 
         <!-- Navegação -->
         <nav class="sidebar-nav" aria-label="Menu principal">
+
             {#each menu as item}
-                <Link
-                    href={item.url}
-                    class="sidebar-link {item.title === breadcrumb ? 'active' : ''}"
-                    title={sidebarCollapsed ? item.title : undefined}
-                    onclick={item.active ? undefined : (event) => event.preventDefault()}
-                >
-                    <i class={`bi ${item.icone}`}></i>
 
-                    {#if !sidebarCollapsed}
-                        <span class="sidebar-link-title">{item.title}</span>
+                {#if item.subMenu}
 
-                        {#if !item.active}
-                            <span class="coming-soon">Em breve</span>
+                    <!-- Menu expansível -->
+                    <button
+                        type="button"
+                        class="sidebar-link submenu-toggle"
+                        class:active={hasActiveSubMenu(item)}
+                        title={sidebarCollapsed ? item.title : undefined}
+                        aria-expanded={!sidebarCollapsed && expandedMenus.includes(item.title)}
+                        onclick={() => {
+                            if (sidebarCollapsed) {
+                                sidebarCollapsed = false;
+
+                                if (!expandedMenus.includes(item.title)) {
+                                    expandedMenus = [...expandedMenus, item.title];
+                                }
+                            } else {
+                                toggleSubMenu(item.title);
+                            }
+                        }}
+                    >
+                        <i class={`bi ${item.icone}`}></i>
+
+                        {#if !sidebarCollapsed}
+                            <span class="sidebar-link-title">
+                                {item.title}
+                            </span>
+
+                            <i class={`bi ms-auto ${
+                                expandedMenus.includes(item.title)
+                                    ? 'bi-chevron-up'
+                                    : 'bi-chevron-down'
+                            }`}></i>
                         {/if}
+                    </button>
+
+                    <!-- Submenu -->
+                    {#if !sidebarCollapsed && expandedMenus.includes(item.title)}
+                        <div class="sidebar-submenu">
+
+                            {#each item.subMenu as sub}
+                                <Link
+                                    href={sub.url}
+                                    class={`sidebar-link sidebar-sublink ${
+                                        sub.title === breadcrumb ? 'active' : ''
+                                    }`}
+                                    onclick={sub.active ? undefined : (event) => event.preventDefault()}
+                                >
+                                    <i class={`bi ${sub.icone}`}></i>
+
+                                    <span class="sidebar-link-title">
+                                        {sub.title}
+                                    </span>
+
+                                    {#if !sub.active}
+                                        <span class="coming-soon">
+                                            Em breve
+                                        </span>
+                                    {/if}
+                                </Link>
+                            {/each}
+
+                        </div>
                     {/if}
-                </Link>
-                <!-- <a
-                    href={item.url}
-                    class:active={item.title == breadcrumb ? true : false}
-                    class="sidebar-link"
-                    aria-current={item.active ? 'page' : undefined}
-                    title={sidebarCollapsed ? item.title : undefined}
-                    onclick={item.active ? undefined : (event) => event.preventDefault()}
-                >
-                    <i class={`bi ${item.icone}`}></i>
 
-                    {#if !sidebarCollapsed}
-                        <span class="sidebar-link-title">
-                            {item.title}
-                        </span>
+                {:else}
 
-                        {#if !item.active}
-                            <span class="coming-soon">Em breve</span>
+                    <!-- Menu normal -->
+                    <Link
+                        href={item.url}
+                        class={`sidebar-link ${item.title === breadcrumb ? 'active' : ''}`}
+                        title={sidebarCollapsed ? item.title : undefined}
+                        onclick={item.active ? undefined : (event) => event.preventDefault()}
+                    >
+                        <i class={`bi ${item.icone}`}></i>
+
+                        {#if !sidebarCollapsed}
+                            <span class="sidebar-link-title">
+                                {item.title}
+                            </span>
+
+                            {#if !item.active}
+                                <span class="coming-soon">
+                                    Em breve
+                                </span>
+                            {/if}
                         {/if}
-                    {/if}
-                </a> -->
+                    </Link>
+
+                {/if}
+
             {/each}
+
         </nav>
 
         <!-- Rodapé do menu -->
@@ -171,7 +274,9 @@
     >
         <!-- Cabeçalho -->
         <header class="topbar">
+
             <div class="topbar-left">
+
                 <button
                     type="button"
                     class="sidebar-toggle"
@@ -184,23 +289,27 @@
                 </button>
 
                 <Breadcrumb breadcrumb={breadcrumb} />
+
             </div>
 
             <div class="topbar-actions">
+
                 <!-- Seletor de idioma -->
-                <SelectorLanguage  bind:userSettings={userSettings}/>
+                <SelectorLanguage bind:userSettings={userSettings}/>
+
                 <!-- Dropdown do usuário -->
-                <DropdownUser bind:usuario={user} />
+                <DropdownUser bind:usuario={user}/>
+
             </div>
+
         </header>
 
         <main class="page-content">
-             <!--Slot -->
-             <slot></slot>
-             <!-- Fim do slot -->
 
-            <!-- Rodapé -->
+            <slot></slot>
+
             <Footer />
+
         </main>
     </div>
 </div>
