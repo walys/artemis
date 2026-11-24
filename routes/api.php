@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Master\Auth\LoginController;
 use App\Http\Controllers\Api\Master\Settings\LanguageApiController;
 
 use App\Http\Controllers\Site\LanguageController;
+use App\Http\Controllers\Api\Master\Plans\PlansApiController;
 
 # Rotas públicas do site
 Route::get('/site/languages', [LanguageController::class, 'index']);
@@ -34,13 +35,17 @@ Route::prefix('master')->group(function () {
         Route::get('/me', [LoginController::class, 'me']);
 
         // Rotas de idiomas
-        Route::get('/settings/languages', [LanguageApiController::class, 'index'])
-            ->name('master.settings.languages.index');
-        Route::post('/settings/languages/portuguese', [
-            LanguageApiController::class,
-            'savePortuguese'
-        ])->name('master.settings.languages.post');
+        Route::get('/settings/languages', [LanguageApiController::class, 'index'])->name('master.settings.languages.index');
+        Route::post('/settings/languages/portuguese', [LanguageApiController::class, 'savePortuguese'])->name('master.settings.languages.post');
 
+        //Rotas de planos
+        Route::get('/settings/languages', [LanguageApiController::class, 'index'])->name('master.settings.languages.index');
+        Route::post('/settings/languages/portuguese', [LanguageApiController::class, 'savePortuguese'])->name('master.settings.languages.post');
+
+        //Rotas de planos
+        Route::apiResource('plans', PlansApiController::class)->names('master.plans');
+        Route::delete('/plans/{plan}', [PlansApiController::class, 'destroy'])->name('master.plans.destroy');
+        Route::post('/plans/update-order', [PlansApiController::class, 'updateOrder'])->name('master.plans.update-order');
     });
 
 });

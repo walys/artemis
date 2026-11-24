@@ -1,70 +1,170 @@
+
 <script>
     import { _ } from "$lib/lang/lang.js";
+    import Crud from "$components/crud/Crud.svelte";
+    import Col from "$components/crud/Col.svelte";
+    import Input from "$components/crud/Input.svelte";
+    import Select from "$components/crud/Select.svelte";
 
-    // Props para comunicação com o pai
-    let { formData = $bindable(), onSubmit, onCancel } = $props();
+    let {
+        showModal = $bindable(false),
+        icon = $bindable(''),
+        id = $bindable(null),
+        onClosed = () => {}
+    } = $props();
 
-    // Estado local do formulário (se não vier via bind)
-    let name = $state(formData?.name ?? '');
-    let description = $state(formData?.description ?? '');
-    let price = $state(formData?.price ?? '');
-    let status = $state(formData?.status ?? 'Ativo');
+    let errors = $state({});
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        onSubmit?.({
-            name,
-            description,
-            price,
-            status
-        });
+    let formDataPlan = $state({
+        name: "",
+        code: "",
+        is_active: null
+    });
+
+    let status = $state([
+        { value: true, label: _("Ativo") },
+        { value: false, label: _("Inativo") }
+    ]);
+
+    let isEditing = $derived(id !== null);
+
+    // URL da coleção: GET e POST
+    let url = route('master.plans.index');
+
+    function resetForm() {
+        formDataPlan = {
+            name: "",
+            code: "",
+            is_active: null
+        };
+
+        errors = {};
+    }
+
+    function closeModal() {
+        showModal = false;
+        id = null;
+        resetForm();
+
+        onClosed();
+    }
+
+    function handleSuccess(response) {
+        console.log("Operação realizada:", response);
     }
 </script>
 
-<form id="plano-form" onsubmit={handleSubmit}>
-    <div class="mb-3">
-        <label for="plano-name" class="form-label">{_('Nome')}</label>
-        <input
-            type="text"
-            class="form-control"
-            id="plano-name"
-            bind:value={name}
-            required
-            placeholder={_('Ex.: Básico')}
-        />
-    </div>
+<div
+    class="modal modal-lg {showModal ? 'show d-block' : ''}"
+    tabindex="-1"
+    style="background: rgba(0,0,0,0.5);"
+    role="dialog"
+    aria-modal="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
-    <div class="mb-3">
-        <label for="plano-description" class="form-label">{_('Descrição')}</label>
-        <textarea
-            class="form-control"
-            id="plano-description"
-            bind:value={description}
-            rows="3"
-            required
-            placeholder={_('Descrição do plano...')}
-        ></textarea>
-    </div>
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class={icon}></i>
+                    {isEditing ? _("Editar plano") : _("Novo plano")}
+                </h5>
 
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="plano-price" class="form-label">{_('Valor')}</label>
-            <input
-                type="text"
-                class="form-control"
-                id="plano-price"
-                bind:value={price}
-                required
-                placeholder="R$ 0,00"
-            />
+                <button
+                    type="button"
+                    class="btn-close"
+                    aria-label="Close"
+                    onclick={closeModal}
+                ></button>
+            </div>
+
+            <Crud
+                classForm="form-floating"
+                formData={formDataPlan}
+                {url}
+                {id}
+                responseKey="plan"
+                formId="plan-form"
+                submitLabel={isEditing ? _("Atualizar") : _("Salvar")}
+                onClose={closeModal}
+                onSuccess={handleSuccess}
+                bind:errors
+            >
+                <div class="row">
+
+                    <Col
+                        classCol="col-md-12"
+                        classDiv="form-floating mb-3"
+                        forCol="floatingInputName"
+                        label={_("Insira o nome do plano")}
+                    >
+                        <Input
+                            type="text"
+                            class="form-control"
+                            id="floatingInputName"
+                            hasError={errors?.name}
+                            isValid={formDataPlan?.name}
+                            placeholder={_("Insira o nome do plano")}
+                            bind:value={formDataPlan.name}
+                        />
+
+                        {#if errors.name}
+                            <div class="text-danger small mt-1">
+                                {errors.name[0]}
+                            </div>
+                        {/if}
+                    </Col>
+
+                    <Col
+                        classCol="col-md-6"
+                        classDiv="form-floating mb-3"
+                        forCol="floatingInputCode"
+                        label={_("Insira o código")}
+                    >
+                        <Input
+                            type="text"
+                            class="form-control"
+                            id="floatingInputCode"
+                            hasError={errors?.code}
+                            isValid={formDataPlan?.code}
+                            placeholder={_("Insira o código")}
+                            bind:value={formDataPlan.code}
+                        />
+
+                        {#if errors.code}
+                            <div class="text-danger small mt-1">
+                                {errors.code[0]}
+                            </div>
+                        {/if}
+                    </Col>
+
+                    <Col
+                        classCol="col-md-6"
+                        classDiv="form-floating mb-3"
+                        forCol="floatingInputStatus"
+                        label={_("Status")}
+                    >
+                        <Select
+                            classSelect="form-control"
+                            items={status}
+                            placeholder={_("Selecione um status")}
+                            bind:value={formDataPlan.is_active}
+                            isValid={formDataPlan?.is_active?.value}
+                            hasError={errors?.is_active}
+                            showChevron
+                            clearable={false}
+                        />
+
+                        {#if errors.is_active}
+                            <div class="text-danger small mt-1">
+                                {errors.is_active[0]}
+                            </div>
+                        {/if}
+                    </Col>
+
+                </div>
+            </Crud>
+
         </div>
-
-        <div class="col-md-6 mb-3">
-            <label for="plano-status" class="form-label">{_('Status')}</label>
-            <select class="form-select" id="plano-status" bind:value={status}>
-                <option value="Ativo">{_('Ativo')}</option>
-                <option value="Inativo">{_('Inativo')}</option>
-            </select>
-        </div>
     </div>
-</form>
+</div>

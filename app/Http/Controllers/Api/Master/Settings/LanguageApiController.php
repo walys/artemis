@@ -91,7 +91,7 @@ class LanguageApiController extends Controller
             default:
                 return response()->json([
                     'success' => false,
-                    'message' => _('Idioma não suportado.'),
+                    'message' => __('Idioma não suportado.'),
                 ], 400);
         }
 
@@ -105,7 +105,7 @@ class LanguageApiController extends Controller
         if ($json === false) {
             return response()->json([
                 'success' => false,
-                'message' => _('Não foi possível gerar o JSON das traduções.'),
+                'message' => __('Não foi possível gerar o JSON das traduções.'),
             ], 500);
         }
 
@@ -113,7 +113,7 @@ class LanguageApiController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => _('Traduções atualizadas com sucesso!'),
+            'message' => __('Traduções atualizadas com sucesso!'),
         ]);
     }
 }

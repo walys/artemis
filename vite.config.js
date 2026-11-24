@@ -22,6 +22,6 @@ export default defineConfig({
         svelte(),
     ],
     optimizeDeps: {
-        exclude: ['@inertiajs/svelte', '@tanstack/svelte-table', '@svar-ui/svelte-grid', '@svar-ui/svelte-core']
+        exclude: ['@inertiajs/svelte', '@tanstack/svelte-table', '@svar-ui/svelte-grid', '@svar-ui/svelte-core', 'svelte-select']
     }
 });

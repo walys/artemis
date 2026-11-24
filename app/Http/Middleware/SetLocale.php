@@ -19,6 +19,7 @@ class SetLocale
         ];
 
         $guard = Auth::guard('master');
+        $user = $guard->user();
 
         $language = $user->settings->language ?? 'pt-BR';
 

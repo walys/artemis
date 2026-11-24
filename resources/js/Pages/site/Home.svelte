@@ -10,6 +10,8 @@
     import ContactSection from "$components/landing/ContactSection.svelte";
     import SiteFooter from "$components/landing/SiteFooter.svelte";
 
+    export let plans = [];
+
 </script>
 
 <svelte:head>
@@ -32,7 +34,7 @@
 
         <ResourcesSection />
 
-        <PlansSection />
+        <PlansSection {plans} />
 
         <ContactSection />
     </main>

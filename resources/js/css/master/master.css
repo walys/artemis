@@ -1100,15 +1100,192 @@
     color: #2e6b8a;
 }
 
-/* button de ação */
-.btn-primary {
-    background-color: #1F70B2 !important;
-    border-color: #2E6B8A !important;
+/* ==============================================
+   MARCA: ARTEMIS — Botões Personalizados
+   Paleta oficial: Frost, Mist, Sky, Steel, Ink
+   Atualizado: 2026
+============================================== */
+
+/* ------------------------------
+   BASE COMUM
+------------------------------ */
+.btn {
+    transition: all 0.25s ease-in-out !important;
+    border-radius: 0.375rem !important;
+    font-weight: 500 !important;
 }
 
+/* ------------------------------
+   CORES DA MARCA (variáveis)
+------------------------------ */
+:root {
+    --frost: #E8F0F8;
+    --mist:  #B8D4E8;
+    --sky:   #6BA3C8;
+    --steel: #2E6B8A;
+    --ink:   #1F3442;
+}
+
+/* ------------------------------
+   BTN-PRIMARY — Principal / Ação
+------------------------------ */
+.btn-primary {
+    background-color: var(--steel) !important;
+    border-color: #265A73 !important;
+    color: #FFFFFF !important;
+}
 .btn-primary:hover {
-    background-color: #195D95 !important;
-    border-color: #195D95 !important;
+    background-color: #265A73 !important;
+    border-color: #1F4A5F !important;
+    color: #FFFFFF !important;
+}
+.btn-outline-primary {
+    border-color: var(--steel) !important;
+    color: var(--steel) !important;
+    background-color: transparent !important;
+}
+.btn-outline-primary:hover {
+    background-color: var(--steel) !important;
+    color: #FFFFFF !important;
+}
+
+/* ------------------------------
+   BTN-SUCCESS — Sucesso / Confirmação
+------------------------------ */
+.btn-success {
+    background-color: #4A9678 !important;
+    border-color: #3E7D64 !important;
+    color: #FFFFFF !important;
+}
+.btn-success:hover {
+    background-color: #3E7D64 !important;
+    border-color: #346954 !important;
+    color: #FFFFFF !important;
+}
+.btn-outline-success {
+    border-color: #4A9678 !important;
+    color: #4A9678 !important;
+    background-color: transparent !important;
+}
+.btn-outline-success:hover {
+    background-color: #4A9678 !important;
+    color: #FFFFFF !important;
+}
+
+/* ------------------------------
+   BTN-INFO — Informação / Secundário
+------------------------------ */
+.btn-info {
+    background-color: var(--sky) !important;
+    border-color: #5A8BB0 !important;
+    color: #FFFFFF !important;
+}
+.btn-info:hover {
+    background-color: #5A8BB0 !important;
+    border-color: #4C7899 !important;
+    color: #FFFFFF !important;
+}
+.btn-outline-info {
+    border-color: var(--sky) !important;
+    color: var(--sky) !important;
+    background-color: transparent !important;
+}
+.btn-outline-info:hover {
+    background-color: var(--sky) !important;
+    color: #FFFFFF !important;
+}
+
+/* ------------------------------
+   BTN-WARNING — Atenção / Aviso
+------------------------------ */
+.btn-warning {
+    background-color: #D4A058 !important;
+    border-color: #B88A4A !important;
+    color: var(--ink) !important;
+}
+.btn-warning:hover {
+    background-color: #B88A4A !important;
+    border-color: #9C743E !important;
+    color: #FFFFFF !important;
+}
+.btn-outline-warning {
+    border-color: #D4A058 !important;
+    color: var(--ink) !important;
+    background-color: transparent !important;
+}
+.btn-outline-warning:hover {
+    background-color: #D4A058 !important;
+    color: #FFFFFF !important;
+}
+
+/* ------------------------------
+   BTN-DANGER — Perigo / Excluir
+------------------------------ */
+.btn-danger {
+    background-color: #B85454 !important;
+    border-color: #9C4646 !important;
+    color: #FFFFFF !important;
+}
+.btn-danger:hover {
+    background-color: #9C4646 !important;
+    border-color: #803A3A !important;
+    color: #FFFFFF !important;
+}
+.btn-outline-danger {
+    border-color: #B85454 !important;
+    color: #B85454 !important;
+    background-color: transparent !important;
+}
+.btn-outline-danger:hover {
+    background-color: #B85454 !important;
+    color: #FFFFFF !important;
+}
+
+/* ------------------------------
+   BTN-LIGHT — Leve / Secundário
+------------------------------ */
+.btn-light {
+    background-color: var(--frost) !important;
+    border-color: var(--mist) !important;
+    color: var(--ink) !important;
+}
+.btn-light:hover {
+    background-color: #DCE6F0 !important;
+    border-color: #9FC4E0 !important;
+    color: var(--ink) !important;
+}
+.btn-outline-light {
+    border-color: var(--mist) !important;
+    color: var(--ink) !important;
+    background-color: transparent !important;
+}
+.btn-outline-light:hover {
+    background-color: var(--frost) !important;
+    border-color: var(--sky) !important;
+    color: var(--ink) !important;
+}
+
+/* ------------------------------
+   BTN-DARK — Escuro / Destaque
+------------------------------ */
+.btn-dark {
+    background-color: var(--ink) !important;
+    border-color: #172833 !important;
+    color: #FFFFFF !important;
+}
+.btn-dark:hover {
+    background-color: #172833 !important;
+    border-color: #0F1C24 !important;
+    color: #FFFFFF !important;
+}
+.btn-outline-dark {
+    border-color: var(--ink) !important;
+    color: var(--ink) !important;
+    background-color: transparent !important;
+}
+.btn-outline-dark:hover {
+    background-color: var(--ink) !important;
+    color: #FFFFFF !important;
 }
 
 .translation-json {

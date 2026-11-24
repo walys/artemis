@@ -1,4 +1,7 @@
 <script>
+    import { onMount } from "svelte";
+    import { _ } from "$lib/lang/lang.js";
+    import { crud } from "$lib/crud/crud.js";
     import { Grid, Willow } from "@svar-ui/svelte-grid";
     import { Pager, Locale } from "@svar-ui/svelte-core";
     import { ptBR } from "$lib/utils/locale-grid.js";
@@ -6,41 +9,102 @@
 
     let {
         columns,
-        data,
+        urlGrid,
+        dataKey = 'data',
         initPagination,
-        search = '',
-        showOverlay = $bindable()
+        filters = {},
+        reorder,
+        onReorder = null,
+        onEdit = null
     } = $props();
+
+    let data = $state([]);
+    let showOverlay = $state(false);
 
     let currentPageData = $state([]);
     let api = $state();
-    let history = $derived(api?.getReactiveState().history);
-
     let left = 3;
 
-    // Filtragem dos registros
-    let filteredData = $derived.by(() => {
-        const term = search.trim().toLocaleLowerCase();
+    async function getData() {
+        showOverlay = true;
+        try {
+            const response = await crud.get(urlGrid);
+            // data = response?.[dataKey] ?? [];
+            data = response[dataKey].map((item, index) => ({
+                ...item,
+                number: index + 1
+            }));
+        } catch (error) {
+            console.error("Erro ao buscar dados:", error);
+            data = [];
 
-        if (!term) {
+        } finally {
+            showOverlay = false;
+        }
+    }
+
+    onMount(async () => {
+        await getData();
+    });
+
+    function normalizeSearchValue(value) {
+        if (typeof value === 'boolean') {
+            return value
+                ? 'true ativo'
+                : 'false inativo';
+        }
+
+        if (value !== null && typeof value === 'object') {
+            value = value.label ?? value.value ?? '';
+        }
+
+        return String(value ?? '').trim().toLocaleLowerCase();
+    }
+
+    let filteredData = $derived.by(() => {
+        const activeFilters = Object.entries(filters ?? {})
+            .filter(([_, value]) =>
+                value !== '' &&
+                value !== null &&
+                value !== undefined
+            );
+
+        if (activeFilters.length === 0) {
             return data;
         }
 
         return data.filter((item) =>
-            Object.values(item).some((value) =>
-                String(value ?? '')
-                    .toLocaleLowerCase()
-                    .includes(term)
-            )
+            activeFilters.every(([field, value]) => {
+                const itemValue = normalizeSearchValue(item[field]);
+                const filterValue = normalizeSearchValue(value);
+
+                return itemValue.includes(filterValue);
+            })
         );
     });
 
-    // Inicialização e ordenação do Grid
-    const init = (api) => {
-        api.exec("sort-rows", {
+    const init = (gridApi) => {
+        gridApi.exec("sort-rows", {
             key: "id",
             order: "asc"
         });
+
+        gridApi.on("edit-item", (ev) => {
+            onEdit?.(ev.id);
+        });
+
+        if (reorder && typeof onReorder === 'function') {
+            gridApi.on("move-item", (ev) => {
+                if (ev.inProgress === false) {
+                    const currentData = gridApi.getState().data;
+
+                    onReorder({
+                        event: ev,
+                        data: currentData
+                    });
+                }
+            });
+        }
     };
 
     // Paginação
@@ -50,7 +114,17 @@
         currentPageData = filteredData.slice(from, to);
     }
 
-    // Atualiza a página quando os dados ou a pesquisa mudarem
+    function cellStyle(row, col) {
+        return "center";
+    }
+
+    export function reload(delay = 2000) {
+        showOverlay = true;
+        setTimeout(() => {
+            getData();   // sem await
+        }, delay);
+    }
+
     $effect(() => {
         filteredData;
         initPagination;
@@ -74,6 +148,8 @@
                         bind:this={api}
                         overlay={showOverlay ? Overlay : null}
                         split={{ left }}
+                        reorder={reorder}
+                        {cellStyle}
                     />
                 </div>
             </div>
@@ -84,7 +160,7 @@
                     pageSize={initPagination}
                     onchange={setPage}
                 />
-            {:else}
+            {:else if !showOverlay}
                 <div class="text-center text-muted py-4">
                     <i class="bi bi-search fs-3 d-block mb-2"></i>
                     {_("Nenhum registro encontrado.")}
@@ -94,7 +170,23 @@
     </Locale>
 </div>
 
+
 <style>
+    :global(.wx-willow-theme .wx-text) {
+        width: 100%;
+        text-align: center !important;
+        display: flex;
+        justify-content: center !important;
+        align-items: center;
+    }
+
+    :global(.center) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
     .table-container {
         width: 100%;
         background: #ffffff;
@@ -142,6 +234,7 @@
         --wx-table-fixed-column-right-border: 2px solid #B8D4E8;
         --wx-table-editor-dropdown-border: 1px solid #B8D4E8;
         --wx-table-editor-dropdown-shadow: 0 8px 24px rgba(31, 52, 66, 0.12);
+        
     }
 
     :global(.wx-willow-theme .wx-row:hover) {
