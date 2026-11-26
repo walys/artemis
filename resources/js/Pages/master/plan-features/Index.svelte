@@ -72,7 +72,6 @@
             resize: true,
             sort: false,
             cell: ButtonEdit,
-            cell: ActiveCell
         }
     ];
 
