@@ -5,6 +5,7 @@ namespace App\Models\Plans;
 use App\Models\Subscriptions\CompanySubscription;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Plan extends Model
 {
@@ -25,9 +26,9 @@ class Plan extends Model
         ];
     }
 
-    public function features(): HasMany
+    public function features(): HasOne
     {
-        return $this->hasMany(PlanFeature::class);
+        return $this->hasOne(PlanFeature::class);
     }
 
     public function prices(): HasMany

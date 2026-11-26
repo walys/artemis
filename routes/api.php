@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Master\Settings\LanguageApiController;
 
 use App\Http\Controllers\Site\LanguageController;
 use App\Http\Controllers\Api\Master\Plans\PlansApiController;
+use App\Http\Controllers\Api\Master\Plans\PlanFeaturesApiController;
 
 # Rotas públicas do site
 Route::get('/site/languages', [LanguageController::class, 'index']);
@@ -46,6 +47,9 @@ Route::prefix('master')->group(function () {
         Route::apiResource('plans', PlansApiController::class)->names('master.plans');
         Route::delete('/plans/{plan}', [PlansApiController::class, 'destroy'])->name('master.plans.destroy');
         Route::post('/plans/update-order', [PlansApiController::class, 'updateOrder'])->name('master.plans.update-order');
+
+        //Rotas de configuração de Planos
+        Route::apiResource('plan-feature', PlanFeaturesApiController::class)->names('master.plans.feature');
     });
 
 });

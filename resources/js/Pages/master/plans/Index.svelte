@@ -15,8 +15,6 @@
     let showModal = $state(false);
     let planId = $state(null);
 
-    let gridRef = $state(); 
-    let urlGrid = route('master.plans.index');
     let columns = $state([
         {
             id: "number",
@@ -57,6 +55,10 @@
             cell: ButtonEdit,
         }
     ]);
+
+    let gridRef = $state(); 
+    let urlGrid = route('master.plans.index');
+    
     let filters = $state({
         name: '',
         is_active: '',
@@ -137,6 +139,7 @@
                 reorder={true}
                 onReorder={handleReorder}
                 onEdit={handleEdit}
+                tree={false}
             />
 
         </div>

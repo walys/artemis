@@ -10,7 +10,7 @@
     <div class={classCol}>
         <div class={classDiv}>
             <slot />
-            <label for={forCol}>{label}</label>
+            <label for={forCol} class="form-label">{label}</label>
         </div>
     </div>
 <!-- </div> -->

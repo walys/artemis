@@ -25,7 +25,6 @@
 <style>
     :global(.svelte-select) {
         position: relative;
-        z-index: 1000;
         color: #1F3442;
         font-size: 13px;
     }
@@ -40,7 +39,11 @@
         min-height: 30px;
     }
 
+    :global(.svelte-select.focused) {
+        z-index: 100;
+    }
+
     :global(.svelte-select .list) {
-        z-index: 9999 !important;
+        z-index: 9999;
     }
 </style>

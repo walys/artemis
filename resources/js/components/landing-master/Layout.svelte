@@ -70,10 +70,10 @@
                     url: '/master/plans',
                 },
                 {
-                    title: _('Planos descrição'),
+                    title: _('Planos e funcionalidades'),
                     icone: 'bi-card-text',
-                    active: false,
-                    url: '/master/plans-description',
+                    active: true,
+                    url: '/master/plans-features',
                 },
             ],
         },
@@ -106,7 +106,6 @@
     // Abre automaticamente o submenu da página atual
     $effect(() => {
         const activeMenu = menu.find(item => hasActiveSubMenu(item));
-
         if (activeMenu && !expandedMenus.includes(activeMenu.title)) {
             expandedMenus = [...expandedMenus, activeMenu.title];
         }

@@ -62,12 +62,10 @@ class PlanFeatureSeeder extends Seeder
                 continue;
             }
 
-            foreach ($planFeatures as $featureKey => $featureValue) {
-                $plan->features()->updateOrCreate(
-                    ['feature_key' => $featureKey],
-                    ['feature_value' => $featureValue]
-                );
-            }
+            $plan->features()->updateOrCreate(
+                [],
+                $planFeatures
+            );
         }
     }
 }

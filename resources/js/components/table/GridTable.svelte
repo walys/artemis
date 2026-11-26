@@ -15,7 +15,9 @@
         filters = {},
         reorder,
         onReorder = null,
-        onEdit = null
+        onEdit = null,
+        tree = false,
+        treeKey = null
     } = $props();
 
     let data = $state([]);
@@ -159,6 +161,30 @@
 
         await getData();
     }
+
+    // Controla os grupos expandidos
+    let expandedGroups = $state({});
+
+    function toggleGroup(id) {
+        expandedGroups[id] = !expandedGroups[id];
+    }
+
+    // Retorna os dados do relacionamento configurado
+    function getTreeData(item) {
+        if (!treeKey) return {};
+
+        const relation = item?.[treeKey];
+
+        if (Array.isArray(relation)) {
+            return relation;
+        }
+
+        if (relation && typeof relation === 'object') {
+            return [relation];
+        }
+
+        return [];
+    }
 </script>
 
 <div class="table-container">
@@ -168,6 +194,61 @@
 
             <div class="grid-wrapper">
                 <div class="grid-content">
+                    {#if tree}
+                        <div class="tree-table">
+
+                            {#each currentPageData as dataTree (dataTree.id)}
+                                <div class="tree-group">
+
+                                    <!-- Cabeçalho do grupo -->
+                                    <button
+                                        type="button"
+                                        class="tree-group-header"
+                                        aria-expanded={!!expandedGroups[dataTree.id]}
+                                        onclick={() => toggleGroup(dataTree.id)}
+                                    >
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="bi bi-chevron-right tree-chevron"
+                                                class:expanded={!!expandedGroups[dataTree.id]}
+                                            ></i>
+
+                                            <i class="bi bi-folder2-open"></i>
+
+                                            <strong>{dataTree.name}</strong>
+                                        </span>
+
+                                        <span class="tree-group-action">
+                                            <i class="bi"
+                                                class:bi-chevron-down={!expandedGroups[dataTree.id]}
+                                                class:bi-chevron-up={!!expandedGroups[dataTree.id]}
+                                            ></i>
+                                        </span>
+                                    </button>
+
+                                    <!-- Conteúdo recolhível -->
+                                    {#if expandedGroups[dataTree.id]}
+                                        <div class="tree-group-content">
+
+                                            <Grid
+                                                data={getTreeData(dataTree).map((item) => ({
+                                                    id: dataTree.id,
+                                                    ...item
+                                                }))}
+                                                overlay={showOverlay ? Overlay : null}
+                                                {columns}
+                                                {cellStyle}
+                                                {init}
+                                            />
+
+                                        </div>
+                                    {/if}
+
+                                </div>
+                            {/each}
+
+                        </div>
+
+                    {:else}
                     <Grid
                         data={currentPageData}
                         {columns}
@@ -178,6 +259,7 @@
                         reorder={reorder}
                         {cellStyle}
                     />
+                    {/if}
                 </div>
             </div>
 
@@ -359,5 +441,79 @@
         .grid-wrapper {
             justify-content: flex-start;
         }
+    }
+
+    /* ========================================
+    TABELA AGRUPADA
+    ======================================== */
+
+    .tree-table {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .tree-group {
+        width: 100%;
+        border: 1px solid #B8D4E8;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #FFFFFF;
+    }
+
+    .tree-group-header {
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        border: none;
+        background: #E8F0F8;
+        color: #1F3442;
+
+        text-align: left;
+        cursor: pointer;
+
+        transition: background 0.2s ease;
+    }
+
+    .tree-group-header:hover {
+        background: #DCEAF5;
+    }
+
+    .tree-group-header strong {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .tree-group-header > span > i {
+        color: #2E6B8A;
+    }
+
+    .tree-chevron {
+        transition: transform 0.2s ease;
+    }
+
+    .tree-chevron.expanded {
+        transform: rotate(90deg);
+    }
+
+    .tree-group-action {
+        font-size: 13px;
+    }
+
+    .tree-group-content {
+        padding: 0;
+        border-top: 1px solid #B8D4E8;
+        overflow-x: auto;
+    }
+
+    /* Remove margens internas desnecessárias da Grid */
+    .tree-group-content :global(.wx-grid) {
+        border: none;
     }
 </style>

@@ -12,6 +12,7 @@ use App\Http\Controllers\Master\Auth\LoginController;
 use App\Http\Controllers\Master\Dashboard\DashboardController;
 use App\Http\Controllers\Master\Settings\LanguageController;
 use App\Http\Controllers\Master\Plans\PlanController;
+use App\Http\Controllers\Master\Plans\PlanFeaturesController;
 
 #Admin 
 
@@ -50,5 +51,6 @@ Route::prefix('master')->name('master.')->group(function () {
 
         # Rotas de Planos
         Route::get('/plans', [PlanController::class, 'index'])->name('plans');
+        Route::get('/plans-features', [PlanFeaturesController::class, 'index'])->name('plans-feature');
     });
 });

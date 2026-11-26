@@ -41,6 +41,18 @@
         },
     };
 
+    // Recursos disponíveis nos planos
+    const featureKeys = [
+        "max_exams",
+        "max_laboratories",
+        "max_users",
+        "max_branches",
+        "reports",
+        "financial_management",
+        "custom_branding",
+        "data_export",
+    ];
+
     const paymentLabels = {
         pix: "Pix",
         credit_card: _("Cartão de crédito"),
@@ -70,13 +82,10 @@
     }
 
     function formatPrice(amount) {
-        return new Intl.NumberFormat(
-            language,
-            {
-                style: "currency",
-                currency: "BRL",
-            }
-        ).format(amount / 100);
+        return new Intl.NumberFormat(language, {
+            style: "currency",
+            currency: "BRL",
+        }).format(amount / 100);
     }
 
     function getFeatureLabel(key) {
@@ -107,10 +116,16 @@
         return paymentLabels[method] || method;
     }
 
+    // Agora features é um objeto, não uma coleção.
     function getActiveFeatures(plan) {
-        return (plan.features || []).filter(feature => {
-            return feature.feature_value !== false;
-        });
+        if (!plan.features) {
+            return [];
+        }
+
+        return featureKeys.map(key => ({
+            key,
+            value: plan.features[key],
+        }));
     }
 </script>
 
@@ -167,15 +182,15 @@
                         </div>
 
                         <div class="plan-features">
-                            {#each getActiveFeatures(plan) as feature (feature.id)}
+                            {#each getActiveFeatures(plan) as feature (feature.key)}
                                 <div class="plan-feature">
                                     <i class="bi bi-check-circle"></i>
 
                                     <span>
-                                        {getFeatureLabel(feature.feature_key)}:
+                                        {getFeatureLabel(feature.key)}:
 
                                         <strong>
-                                            {getFeatureValue(feature.feature_value)}
+                                            {getFeatureValue(feature.value)}
                                         </strong>
                                     </span>
                                 </div>
@@ -214,67 +229,66 @@
         </p>
     </div>
 </section>
+
 <style>
+    .plan-prices {
+        margin: 1.5rem 0;
+    }
 
-.plan-prices {
-    margin: 1.5rem 0;
-}
+    .plan-price strong {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
 
-.plan-price strong {
-    font-size: 1.8rem;
-    font-weight: 700;
-}
+    .plan-price span {
+        font-size: 0.9rem;
+        color: var(--bs-secondary-color);
+    }
 
-.plan-price span {
-    font-size: 0.9rem;
-    color: var(--bs-secondary-color);
-}
+    .plan-yearly-price {
+        margin-top: 0.4rem;
+        font-size: 0.85rem;
+        color: var(--bs-secondary-color);
+    }
 
-.plan-yearly-price {
-    margin-top: 0.4rem;
-    font-size: 0.85rem;
-    color: var(--bs-secondary-color);
-}
+    .plan-features {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+    }
 
-.plan-features {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin: 1.5rem 0;
-}
+    .plan-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+    }
 
-.plan-feature {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    font-size: 0.9rem;
-}
+    .plan-feature i {
+        color: var(--bs-success);
+    }
 
-.plan-feature i {
-    color: var(--bs-success);
-}
+    .plan-payment-methods {
+        margin: 1.5rem 0;
+    }
 
-.plan-payment-methods {
-    margin: 1.5rem 0;
-}
+    .plan-payment-methods small {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--bs-secondary-color);
+    }
 
-.plan-payment-methods small {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--bs-secondary-color);
-}
+    .plan-payment-methods div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
 
-.plan-payment-methods div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.plan-payment-methods span {
-    padding: 0.3rem 0.65rem;
-    border-radius: 20px;
-    background: var(--bs-tertiary-bg);
-    font-size: 0.8rem;
-}
-
+    .plan-payment-methods span {
+        padding: 0.3rem 0.65rem;
+        border-radius: 20px;
+        background: var(--bs-tertiary-bg);
+        font-size: 0.8rem;
+    }
 </style>

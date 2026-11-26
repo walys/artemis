@@ -12,15 +12,23 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('plan_id')
+                ->unique()
                 ->constrained('plans')
                 ->cascadeOnDelete();
 
-            $table->string('feature_key');
-            $table->json('feature_value');
+            // Limites
+            $table->integer('max_exams')->default(0);
+            $table->integer('max_laboratories')->default(0);
+            $table->integer('max_users')->default(0);
+            $table->integer('max_branches')->default(0);
+
+            // Recursos
+            $table->boolean('reports')->default(false);
+            $table->boolean('financial_management')->default(false);
+            $table->boolean('custom_branding')->default(false);
+            $table->boolean('data_export')->default(false);
 
             $table->timestamps();
-
-            $table->unique(['plan_id', 'feature_key']);
         });
     }
 

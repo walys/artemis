@@ -1,4 +1,3 @@
-
 <script>
     import { _ } from "$lib/lang/lang.js";
     import Crud from "$components/crud/Crud.svelte";
