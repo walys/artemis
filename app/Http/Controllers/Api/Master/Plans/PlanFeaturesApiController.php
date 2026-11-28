@@ -50,6 +50,39 @@ class PlanFeaturesApiController extends Controller
             'financial_management' => ['required', 'boolean'],
             'custom_branding' => ['required', 'boolean'],
             'data_export' => ['required', 'boolean'],
+        ], [
+            'plan_id.required' => __('Selecione um plano.'),
+            'plan_id.integer' => __('O plano selecionado é inválido.'),
+            'plan_id.exists' => __('O plano selecionado não foi encontrado.'),
+            'plan_id.unique' => __('Este plano já possui funcionalidades cadastradas.'),
+
+            'max_exams.required' => __('Informe o limite de exames.'),
+            'max_exams.integer' => __('O limite de exames deve ser um número inteiro.'),
+            'max_exams.min' => __('O limite de exames deve ser no mínimo -1.'),
+
+            'max_laboratories.required' => __('Informe o limite de laboratórios.'),
+            'max_laboratories.integer' => __('O limite de laboratórios deve ser um número inteiro.'),
+            'max_laboratories.min' => __('O limite de laboratórios deve ser no mínimo -1.'),
+
+            'max_users.required' => __('Informe o limite de usuários.'),
+            'max_users.integer' => __('O limite de usuários deve ser um número inteiro.'),
+            'max_users.min' => __('O limite de usuários deve ser no mínimo -1.'),
+
+            'max_branches.required' => __('Informe o limite de filiais.'),
+            'max_branches.integer' => __('O limite de filiais deve ser um número inteiro.'),
+            'max_branches.min' => __('O limite de filiais deve ser no mínimo -1.'),
+
+            'reports.required' => __('Informe se o recurso de relatórios está incluído.'),
+            'reports.boolean' => __('A opção de relatórios deve ser verdadeira ou falsa.'),
+
+            'financial_management.required' => __('Informe se a gestão financeira está incluída.'),
+            'financial_management.boolean' => __('A opção de gestão financeira deve ser verdadeira ou falsa.'),
+
+            'custom_branding.required' => __('Informe se a identidade visual personalizada está incluída.'),
+            'custom_branding.boolean' => __('A opção de identidade visual deve ser verdadeira ou falsa.'),
+
+            'data_export.required' => __('Informe se a exportação de dados está incluída.'),
+            'data_export.boolean' => __('A opção de exportação de dados deve ser verdadeira ou falsa.'),
         ]);
 
         $feature = $this->planFeatureService->store($data);
@@ -95,6 +128,30 @@ class PlanFeaturesApiController extends Controller
             'financial_management' => ['sometimes', 'boolean'],
             'custom_branding' => ['sometimes', 'boolean'],
             'data_export' => ['sometimes', 'boolean'],
+        ], [
+            'plan_id.integer' => __('O plano selecionado é inválido.'),
+            'plan_id.exists' => __('O plano selecionado não foi encontrado.'),
+            'plan_id.unique' => __('Este plano já possui funcionalidades cadastradas.'),
+
+            'max_exams.integer' => __('O limite de exames deve ser um número inteiro.'),
+            'max_exams.min' => __('O limite de exames deve ser no mínimo -1.'),
+
+            'max_laboratories.integer' => __('O limite de laboratórios deve ser um número inteiro.'),
+            'max_laboratories.min' => __('O limite de laboratórios deve ser no mínimo -1.'),
+
+            'max_users.integer' => __('O limite de usuários deve ser um número inteiro.'),
+            'max_users.min' => __('O limite de usuários deve ser no mínimo -1.'),
+
+            'max_branches.integer' => __('O limite de filiais deve ser um número inteiro.'),
+            'max_branches.min' => __('O limite de filiais deve ser no mínimo -1.'),
+
+            'reports.boolean' => __('A opção de relatórios deve ser verdadeira ou falsa.'),
+
+            'financial_management.boolean' => __('A opção de gestão financeira deve ser verdadeira ou falsa.'),
+
+            'custom_branding.boolean' => __('A opção de identidade visual deve ser verdadeira ou falsa.'),
+
+            'data_export.boolean' => __('A opção de exportação de dados deve ser verdadeira ou falsa.'),
         ]);
 
         $feature = $this->planFeatureService->update(

@@ -3,6 +3,7 @@
 namespace App\Services\Plans;
 
 use App\Models\Plans\Plan;
+use App\Models\Plans\PlanFeature;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,22 @@ class PlanService
      */
     public function store(array $data): Plan
     {
-        return Plan::create($data);
+        return DB::transaction(function () use ($data) {
+
+            // Cadastra o plano
+            $plan = Plan::create($data);
+
+            // Cria as funcionalidades padrão
+            $this->createFeatures($plan);
+
+            // Cria as descrições nos três idiomas
+            $this->createDescriptions($plan);
+
+            return $plan->load([
+                'features',
+                'descriptions.language',
+            ]);
+        });
     }
 
     /**
@@ -52,25 +68,82 @@ class PlanService
     }
 
     /**
-     * Exclui um plano.
+     * Atualiza a ordem dos planos.
      */
     public function destroy(Plan $plan): bool
     {
-        return $plan->delete();
+        return DB::transaction(function () use ($plan) {
+
+            // Exclui as descrições do plano
+            $plan->descriptions()->delete();
+
+            // Exclui as funcionalidades do plano
+            $plan->features()->delete();
+
+            // Exclui o plano
+            return (bool) $plan->delete();
+        });
     }
 
     /**
-     * Atualiza a ordem dos planos.
+     * Atualiza a ordem de exibição dos planos.
      */
-    public function updateOrder(array $plans): void
+    public function updateOrder(array $plans): bool
     {
-        DB::transaction(function () use ($plans) {
-            foreach ($plans as $item) {
-                Plan::whereKey($item['id'])
+        return DB::transaction(function () use ($plans) {
+
+            foreach ($plans as $plan) {
+                Plan::where('id', $plan['id'])
                     ->update([
-                        'sort_order' => $item['sort_order'],
+                        'sort_order' => $plan['sort_order'],
                     ]);
             }
+
+            return true;
         });
+    }
+
+    public function createFeatures(Plan $plan)
+    {
+        $plan->features()->create([
+                'max_exams' => 0,
+                'max_laboratories' => 0,
+                'max_users' => 0,
+                'max_branches' => 0,
+                'reports' => false,
+                'financial_management' => false,
+                'custom_branding' => false,
+                'data_export' => false,
+            ]);
+
+        return $plan;
+    }
+
+    /**
+     * Cria as descrições padrão do plano nos idiomas disponíveis.
+     */
+    public function createDescriptions(Plan $plan): Plan
+    {
+        $descriptions = [
+            'pt-BR' => 'Texto de teste',
+            'en-US' => 'Test text',
+            'es-ES' => 'Texto de prueba',
+        ];
+
+        foreach ($descriptions as $languageCode => $description) {
+            $language = \App\Models\Settings\Language::where('code', $languageCode)
+                ->first();
+
+            if (!$language) {
+                continue;
+            }
+
+            $plan->descriptions()->create([
+                'language_id' => $language->id,
+                'description' => $description,
+            ]);
+        }
+
+        return $plan;
     }
 }

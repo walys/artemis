@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use App\Models\Settings\Language;
 
 class LanguageApiController extends Controller
 {
@@ -116,4 +117,15 @@ class LanguageApiController extends Controller
             'message' => __('Traduções atualizadas com sucesso!'),
         ]);
     }
+
+    public function getLanguages()
+    {
+        $language = Language::select('id as value', 'name as label', 'code')
+        ->orderBy('name')
+        ->get();
+        $languages = $language->toArray();
+
+        return response()->json($languages);
+    }
+
 }

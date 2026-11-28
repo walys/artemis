@@ -1,15 +1,16 @@
-
 <script>
+    import { _ } from "$lib/lang/lang.js";
     import Select from "svelte-select";
 
     let {
         classSelect = "form-control",
         placeholder = _("Selecione ..."),
-        items,
+        items = [],
         value = $bindable(),
         isValid = false,
         hasError = false,
-        clearable = false
+        clearable = false,
+        disabled = false,
     } = $props();
 </script>
 
@@ -20,6 +21,7 @@
     bind:value
     showChevron
     {clearable}
+    {disabled}
 />
 
 <style>

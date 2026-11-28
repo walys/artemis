@@ -4,12 +4,10 @@
     import GridTable from "$components/table/GridTable.svelte";
     import ActiveCell from "$master/plan-features/ActiveCell.svelte";
     import ButtonEdit from "$components/table/ButtonEdit.svelte";
-    import { crud } from "$lib/crud/crud.js";
-    import sweetalert from "$lib/sweet/sweetalert.js";
     import Form from "$master/plan-features/Form.svelte";
     import Filter from "$master/plan-features/Filter.svelte";
 
-    let breadcrumb = _("Planos e funcionalidades");
+    let breadcrumb = _("Funcionalidades dos Planos");
     let icon = 'bi bi-briefcase';
 
     let showModal = $state(false);
@@ -24,45 +22,53 @@
         {
             id: "max_exams",
             header: _("Exames/mês"),
-            width: 140,
+            width: 100,
+            sort: false,
         },
         {
             id: "max_laboratories",
             header: _("Laboratórios"),
-            width: 140,
+            width: 100,
+            sort: false,
         },
         {
             id: "max_users",
             header: _("Usuários"),
-            width: 120,
+            width: 100,
+            sort: false,
         },
         {
             id: "max_branches",
             header: _("Filiais"),
-            width: 120,
+            width: 100,
+            sort: false,
         },
         {
             id: "reports",
             header: _("Relatórios"),
-            width: 140,
+            width: 100,
+            sort: false,
             cell: ActiveCell
         },
         {
             id: "financial_management",
             header: _("Gestão financeira"),
             width: 160,
+            sort: false,
             cell: ActiveCell
         },
         {
             id: "custom_branding",
             header: _("Identidade visual"),
             width: 160,
+            sort: false,
             cell: ActiveCell
         },
         {
             id: "data_export",
             header: _("Exportação"),
             width: 140,
+            sort: false,
             cell: ActiveCell
         },
         {
@@ -76,7 +82,7 @@
     ];
 
     function handleEdit(id) {
-        console.log("ID recebido:", id);
+        // console.log("ID recebido:", id);
 
         planFeatureId = id;
         showModal = true;
@@ -84,30 +90,8 @@
   
     async function handleReorder({ event, data }) {
         if (event.inProgress !== false) return;
-        await handleUpdateOrder(data);
     }
 
-    async function handleUpdateOrder(data) {
-        const plans = data.map((plan, index) => ({
-            id: plan.id,
-            sort_order: index + 1
-        }));
-
-        try {
-            const response = await crud.post(
-                route('master.plans.update-order'),
-                { plans }
-            );
-            sweetalert(
-                _("Sucesso"),
-                response.message,
-                "success"
-            );
-            await gridRef?.reload();
-        } catch (error) {
-            console.error('Erro ao atualizar ordem dos planos:', error);
-        }
-    }
 
     function handleFormClose() {
         gridRef?.reload();
@@ -124,7 +108,7 @@
                     <div class="shortcut-icon">
                         <i class={icon}></i>
                     </div>
-                    {_('Planos e funcionalidades')}
+                    {breadcrumb}
                 </h5>
 
                 <!-- <button type="button" class="btn btn-primary" onclick={openModal}>

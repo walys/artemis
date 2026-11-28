@@ -25,6 +25,8 @@
     // Estado dos submenus expandidos
     let expandedMenus = $state([]);
 
+    let titleTag  = breadcrumb ?? _("Início")
+
     // Alterna o menu lateral
     function toggleSidebar() {
         sidebarCollapsed = !sidebarCollapsed;
@@ -53,27 +55,46 @@
             url: '/master/dashboard',
         },
         {
-            title: _('Idiomas'),
-            icone: 'bi-translate',
-            active: true,
-            url: '/master/languages',
-        },
-        {
-            title: _('Gerenciar Planos'),
-            icone: 'bi-briefcase',
+            title: _('Planos'),
+            icone: 'bi-award-fill',
             active: true,
             subMenu: [
                 {
                     title: _('Planos'),
-                    icone: 'bi-card-list',
+                    icone: 'bi-award',
                     active: true,
                     url: '/master/plans',
                 },
                 {
-                    title: _('Planos e funcionalidades'),
-                    icone: 'bi-card-text',
+                    title: _('Descrições dos Planos'),
+                    icone: 'bi-award',
+                    active: true,
+                    url: '/master/plans-description',
+                },
+                {
+                    title: _('Funcionalidades dos Planos'),
+                    icone: 'bi-award',
                     active: true,
                     url: '/master/plans-features',
+                },
+                {
+                    title: _('Preços dos Planos'),
+                    icone: 'bi-award',
+                    active: true,
+                    url: '/master/plans-prices',
+                },
+            ],
+        },
+        {
+            title: _('Configurações'),
+            icone: 'bi-gear-wide-connected',
+            active: true,
+            subMenu: [
+                {
+                    title: _('Idiomas'),
+                    icone: 'bi-translate',
+                    active: true,
+                    url: '/master/languages',
                 },
             ],
         },
@@ -113,7 +134,7 @@
 </script>
 
 <svelte:head>
-    <title>{_("Início")} | Artemis</title>
+    <title>{titleTag} | Artemis</title>
     <meta
         name="description"
         content={_("Painel inicial do sistema de administração de laboratório veterinário Artemis.")}

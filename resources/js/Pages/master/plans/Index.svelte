@@ -14,12 +14,11 @@
 
     let showModal = $state(false);
     let planId = $state(null);
-
     let columns = $state([
         {
             id: "number",
             header: { text: _("#"), css: "center" },
-            width: 50,
+            width: 100,
             resize: true,
             sort: false,
             draggable: true
@@ -27,7 +26,7 @@
         {
             id: "name",
             header: { text: _("Nome"), css: "center" },
-            width: 350,
+            width: 400,
             resize: true,
             sort: true
         },
@@ -50,9 +49,9 @@
             id: "edit",
             header: { text: _("Editar"), css: "center" },
             width: 200,
-            resize: true,
+            resize: false,
             sort: false,
-            cell: ButtonEdit,
+            cell: ButtonEdit
         }
     ]);
 
@@ -71,7 +70,7 @@
     }
 
     function handleEdit(id) {
-        console.log("ID recebido:", id);
+        // console.log("ID recebido:", id);
 
         planId = id;
         showModal = true;
@@ -118,7 +117,7 @@
                     <div class="shortcut-icon">
                         <i class={icon}></i>
                     </div>
-                    {_('Gerenciamento de planos')}
+                    {breadcrumb}
                 </h5>
 
                 <button type="button" class="btn btn-primary" onclick={openModal}>

@@ -104,6 +104,7 @@
                 onClose={closeModal}
                 onSuccess={handleSuccess}
                 bind:errors
+                buttonDelete={false}
             >
                 <div class="row">
 

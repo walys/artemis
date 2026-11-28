@@ -8,7 +8,9 @@ use App\Http\Controllers\Api\Master\Settings\LanguageApiController;
 
 use App\Http\Controllers\Site\LanguageController;
 use App\Http\Controllers\Api\Master\Plans\PlansApiController;
+use App\Http\Controllers\Api\Master\Plans\PlanDescriptionsApiController;
 use App\Http\Controllers\Api\Master\Plans\PlanFeaturesApiController;
+use App\Http\Controllers\Api\Master\Plans\PlanPricesApiController;
 
 # Rotas públicas do site
 Route::get('/site/languages', [LanguageController::class, 'index']);
@@ -38,18 +40,25 @@ Route::prefix('master')->group(function () {
         // Rotas de idiomas
         Route::get('/settings/languages', [LanguageApiController::class, 'index'])->name('master.settings.languages.index');
         Route::post('/settings/languages/portuguese', [LanguageApiController::class, 'savePortuguese'])->name('master.settings.languages.post');
+        Route::get('/settings/get-languages', [LanguageApiController::class, 'getLanguages'])->name('master.settings.languages-list');
 
         //Rotas de planos
         Route::get('/settings/languages', [LanguageApiController::class, 'index'])->name('master.settings.languages.index');
         Route::post('/settings/languages/portuguese', [LanguageApiController::class, 'savePortuguese'])->name('master.settings.languages.post');
 
         //Rotas de planos
-        Route::apiResource('plans', PlansApiController::class)->names('master.plans');
-        Route::delete('/plans/{plan}', [PlansApiController::class, 'destroy'])->name('master.plans.destroy');
+        Route::apiResource('plans', PlansApiController::class)->names('master.plans');      
         Route::post('/plans/update-order', [PlansApiController::class, 'updateOrder'])->name('master.plans.update-order');
+        Route::get('plans/plan-list', [PlansApiController::class, 'planList'])->name('master.plans.plan-list');
 
-        //Rotas de configuração de Planos
+        //Rotas de descrições dos Planos
+        Route::apiResource('plan-description', PlanDescriptionsApiController::class)->names('master.plans.description');
+
+        //Rotas de configuração dos Planos
         Route::apiResource('plan-feature', PlanFeaturesApiController::class)->names('master.plans.feature');
+
+        //Rotas de Preços dos Planos
+        Route::apiResource('plan-price', PlanPricesApiController::class)->names('master.plans.price');
     });
 
 });

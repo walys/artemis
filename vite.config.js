@@ -21,6 +21,14 @@ export default defineConfig({
         }),
         svelte(),
     ],
+    server: {
+        host: '0.0.0.0', // Permite acesso externo
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            host: 'localhost', // O navegador tentará acessar localhost:5173
+        },
+    },
     optimizeDeps: {
         exclude: ['@inertiajs/svelte', '@tanstack/svelte-table', '@svar-ui/svelte-grid', '@svar-ui/svelte-core', 'svelte-select']
     }

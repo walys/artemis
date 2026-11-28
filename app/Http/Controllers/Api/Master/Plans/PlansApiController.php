@@ -35,6 +35,18 @@ class PlansApiController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'code' => ['required', 'string', 'max:50', 'unique:plans,code'],
             'is_active' => ['required', 'boolean'],
+        ], [
+            'name.required' => __('Informe o nome do plano.'),
+            'name.string' => __('O nome do plano deve ser um texto válido.'),
+            'name.max' => __('O nome do plano não pode ter mais de 255 caracteres.'),
+
+            'code.required' => __('Informe o código do plano.'),
+            'code.string' => __('O código do plano deve ser um texto válido.'),
+            'code.max' => __('O código do plano não pode ter mais de 50 caracteres.'),
+            'code.unique' => __('Este código já está sendo utilizado por outro plano.'),
+
+            'is_active.required' => __('Informe se o plano está ativo.'),
+            'is_active.boolean' => __('O status do plano deve ser ativo ou inativo.'),
         ]);
 
         $plan = $this->planService->store($validated);
@@ -72,6 +84,18 @@ class PlansApiController extends Controller
                 'unique:plans,code,' . $plan->id,
             ],
             'is_active' => ['required', 'boolean'],
+        ], [
+            'name.required' => __('Informe o nome do plano.'),
+            'name.string' => __('O nome do plano deve ser um texto válido.'),
+            'name.max' => __('O nome do plano não pode ter mais de 255 caracteres.'),
+
+            'code.required' => __('Informe o código do plano.'),
+            'code.string' => __('O código do plano deve ser um texto válido.'),
+            'code.max' => __('O código do plano não pode ter mais de 50 caracteres.'),
+            'code.unique' => __('Este código já está sendo utilizado por outro plano.'),
+
+            'is_active.required' => __('Informe se o plano está ativo.'),
+            'is_active.boolean' => __('O status do plano deve ser ativo ou inativo.'),
         ]);
 
         $updatedPlan = $this->planService->update($plan, $validated);
@@ -105,6 +129,18 @@ class PlansApiController extends Controller
             'plans' => ['required', 'array', 'min:1'],
             'plans.*.id' => ['required', 'integer', 'exists:plans,id'],
             'plans.*.sort_order' => ['required', 'integer', 'min:1'],
+        ], [
+            'plans.required' => __('Informe os planos para atualizar a ordem.'),
+            'plans.array' => __('A lista de planos enviada é inválida.'),
+            'plans.min' => __('Informe pelo menos um plano para atualizar.'),
+
+            'plans.*.id.required' => __('O identificador do plano é obrigatório.'),
+            'plans.*.id.integer' => __('O identificador do plano deve ser um número inteiro.'),
+            'plans.*.id.exists' => __('Um dos planos informados não foi encontrado.'),
+
+            'plans.*.sort_order.required' => __('A posição de cada plano é obrigatória.'),
+            'plans.*.sort_order.integer' => __('A posição de cada plano deve ser um número inteiro.'),
+            'plans.*.sort_order.min' => __('A posição de cada plano deve ser no mínimo 1.'),
         ]);
 
         $this->planService->updateOrder($validated['plans']);
@@ -128,4 +164,14 @@ class PlansApiController extends Controller
             ]);
         }
     }
+
+    public function planList(): JsonResponse
+    {
+        $plan = Plan::selet('id as value', 'name as label')
+            ->orderBy('sort_order')
+            ->get();
+        $plans = $plan->toArray();
+        return response()->json(['plans' => $plans]);
+    }
+    
 }

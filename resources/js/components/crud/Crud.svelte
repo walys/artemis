@@ -13,7 +13,8 @@
         submitLabel = _("Salvar"),
         onClose = () => {},
         onSuccess = () => {},
-        errors = $bindable({})
+        errors = $bindable({}),
+        buttonDelete = true
     } = $props();
 
     let loading = $state(false);
@@ -173,7 +174,7 @@
 
 <div class="modal-footer">
 
-    {#if isEditing}
+    {#if isEditing && buttonDelete}
         <button
             type="button"
             class="btn btn-danger me-auto"
